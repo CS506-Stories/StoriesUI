@@ -1,6 +1,9 @@
 ### ReactNative ###
 # React Native Stack Base
 
+# User Specific Expo stuff 
+.expo/
+
 ### ReactNative.Android Stack ###
 # Built application files
 *.apk
