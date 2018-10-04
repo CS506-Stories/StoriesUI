@@ -10,6 +10,8 @@ const styles = StyleSheet.create({
   },
 });
 
+//blah blah blah
+
 const Main = () => (
   <View style={styles.container}>
     <Text>Open up App.js to start working on your app!</Text>
