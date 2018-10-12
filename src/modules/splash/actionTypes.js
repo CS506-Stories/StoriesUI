@@ -1,3 +1,3 @@
-const CONT = 'slash/CONT';
+const CONT = 'splash/CONT';
 
 export default CONT;
