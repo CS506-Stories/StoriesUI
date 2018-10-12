@@ -1,19 +1,31 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  Text, View, Button,
+} from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { actions as Act } from '.';
+import styles from './styles';
 
-const Main = () => (
-  <View style={styles.container}>
-    <Text>Open up App.js to start working on your app!</Text>
-  </View>
-);
+const { contSplash } = Act;
 
-export default Main;
+class Splash extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      error: false,
+    };
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>Open up App.js to start working on your app!</Text>
+        <Button onPress={this.props.contSplash()} title="Continue" />
+      </View>
+    );
+  }
+}
+
+export default connect(null, { contSplash })(Splash);

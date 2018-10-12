@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import { reducer as splashReducer } from '../styles';
+import splashReducer from '../modules/splash/reducer';
 
 // Combine all the reducers
 const rootReducer = combineReducers({ splashReducer });
