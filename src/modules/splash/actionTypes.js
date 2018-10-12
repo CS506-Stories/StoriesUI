@@ -1,3 +1,3 @@
-const CONT = 'splash/CONT';
+const UPDATE = 'update';
 
-export default CONT;
+export default UPDATE;
