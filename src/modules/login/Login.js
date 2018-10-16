@@ -1,7 +1,11 @@
 import React from 'react';
 import {
-  Text, View, Button,
+  Text, View, Button, ImageBackground, TextInput, StatusBar, Image,
 } from 'react-native';
+
+import {
+  KeyboardAwareScrollView,
+} from 'react-native-keyboard-aware-scroll-view';
 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -10,16 +14,96 @@ import { updateLogin } from './actions';
 
 
 const Login = (props) => (
-
-
-
-
-
-  <View style={styles.container}>
-    <Text>in login. Open up App.js to start working on your app!</Text>
-    <Button onPress={props.updateLogin} title="Continue" />
-    <Text>{props.reduxExample}</Text>
-  </View>
+  <ImageBackground source={require('../../../assets/img/tempBack.jpeg')} style={styles.back}>
+  {
+    this.state.loaded
+    ? <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }} scrollEnabled={false}>
+        <StatusBar barStyle='light-content'/>
+          <Image source={require('../../../assets/img/tempLogo.png')} style={styles.logoimg}/>
+          { this.state.displayLogin
+            ? <View style={styles.options}>
+                <View style={[styles.login, styles.active]} >
+                  <Button onPress={ () => this.setState({displayLogin: true}) } title="Login" color="#112D4E"/>
+                </View>
+                <View style={styles.signup}>
+                  <Button onPress={ () => this.setState({displayLogin: false}) } title="Sign up" color="#ffffff"/>
+                </View>
+              </View>
+            : <View style={styles.options}>
+                <View style={styles.login}>
+                  <Button onPress={ () => this.setState({displayLogin: true}) } title="Login" color="#ffffff"/>
+                </View>
+                <View style={[styles.signup, styles.active]}>
+                  <Button onPress={ () => this.setState({displayLogin: false}) } title="Sign up" color="#112D4E"/>
+                </View>
+              </View>
+            }
+            <View style={styles.container}>
+            { this.state.displayLogin
+              ? <View>
+                  <TextInput style={styles.username} placeholder='Handle'
+                    returnKeyType={'next'}
+                    keyboardAppearance='light'
+                    autoFocus={false}
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    inputStyle={{marginLeft: 10}}
+                    onChangeText={this.handleHandle}
+                    ref={input => this.handleInput = input}
+                    onSubmitEditing={ () => this.passwordInput.focus() }
+                  />
+                  <TextInput style={styles.password} secureTextEntry={true} placeholder='Password'
+                    returnKeyType={'done'}
+                    onChangeText={this.handlePassword}
+                    ref={input => this.passwordInput = input}
+                    // onSubmitEditing={() => this.login()}
+                  />
+                </View>
+              : <View>
+                  <TextInput style={styles.username} placeholder='Handle'
+                    keyboardAppearance='light'
+                    autoFocus={false}
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    inputStyle={{marginLeft: 10}}
+                    onChangeText={this.handleHandle}
+                    ref={input => this.handleInput = input}
+                    onSubmitEditing={ () => this.emailInput.focus() }
+                    returnKeyType='next'
+                  />
+                  <TextInput style={styles.username} secureTextEntry={false} placeholder={'Email'}
+                    keyboardAppearance='light'
+                    autoFocus={false}
+                    autoCapitalize='none'
+                    autoCorrect={false}
+                    keyboardType='email-address'
+                    returnKeyType='next'
+                    inputStyle={{marginLeft: 10}}
+                    ref={input => this.emailInput = input}
+                    onSubmitEditing={ () => this.passwordInput.focus() }
+                    onChangeText={this.handleEmail}
+                    errorMessage={this.state.isEmailValid ? null : 'Please enter a valid email address'}
+                  />
+                  <TextInput style={styles.username} secureTextEntry={true} placeholder='Password'
+                    ref={input => this.passwordInput = input}
+                    returnKeyType={'done'}
+                    onChangeText={this.handlePassword}
+                    errorMessage={this.state.isPasswordValid ? null : 'Please enter a password with more than 8 characters'}
+                    // onSubmitEditing={() => this.signUp()}
+                  />
+                </View>
+            }
+            </View>
+            <View style={styles.submit}>
+              <Button onPress={() => this.handleSubmit()}
+              title={this.state.displayLogin ? 'Login' : 'Sign up'} color="#ffffff"/>
+            </View>
+          </KeyboardAwareScrollView>
+        :
+        // TODO add loading wheel
+        <Text>Loading...</Text>
+      }
+    </ImageBackground>
 );
 
 
@@ -30,6 +114,20 @@ Login.propTypes = {
   updateLogin: PropTypes.func.isRequired,
   reduxExample: PropTypes.string.isRequired,
 };
+
+
+this.state = {
+  displayLogin: true,
+  loaded: true,
+  email: '',
+  handle: '',
+  password: '',
+  selectedCategory: 0,
+  isLoading: false,
+  isEmailValid: false,
+  isPasswordValid: false,
+};
+
 
 function mapStateToProps(state) {
   return {
