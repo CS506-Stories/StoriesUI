@@ -1,3 +1,7 @@
-const UPDATE = 'update';
+const LOGIN = 'login';
+const SIGNUP = 'signup';
+const LOGOUT = 'signup';
 
-export default UPDATE;
+
+
+export default LOGIN,SIGNUP;
