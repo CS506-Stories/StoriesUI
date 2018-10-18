@@ -20,7 +20,7 @@ export class Login extends Component {
   }
   handleSubmit(){
     if(this.state.displayLogin){
-      this.props.updateLogin(this.state.handle, this.state.password)
+      this.props.login(this.state.handle, this.state.password)
     }
     else {
       this.setState({
@@ -96,7 +96,7 @@ export class Login extends Component {
                         inputStyle={{marginLeft: 10}}
                         onChangeText={this.handleHandle}
                         ref={input => this.handleInput = input}
-                        onSubmitEditing={ () => this.passwordInput.focus() }
+                        onSubmitEditing={ () => this.passwordInput.focus()}
                       />
                       <TextInput style={styles.password} secureTextEntry={true} placeholder='Password'
                         returnKeyType={'done'}
@@ -157,6 +157,8 @@ export class Login extends Component {
 function mapStateToProps(state) {
   return {
     reduxExample: state.loginReducer.reduxExample,
+    handle: state.loginReducer.handle,
+    isLoggedIn: state.loginReducer.isLoggedIn,
   };
 }
 

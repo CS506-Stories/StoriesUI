@@ -86,8 +86,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '40%',
-    width: '40%',
+    height: '30%',
+    width: '30%',
     marginTop: '10%',
   },
 });

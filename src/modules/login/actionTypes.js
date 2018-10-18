@@ -1,7 +1,8 @@
+
 const LOGIN = 'login';
 const SIGNUP = 'signup';
-const LOGOUT = 'signup';
+const LOGOUT = 'logout';
 
 
 
-export default LOGIN,SIGNUP;
+export default {LOGIN,SIGNUP,LOGOUT};

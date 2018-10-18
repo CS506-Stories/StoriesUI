@@ -1,4 +1,4 @@
-import LOGIN, SIGNUP, LOGOUT,  from './actionTypes';
+import { LOGIN, SIGNUP, LOGOUT, } from './actionTypes';
 
 export const updateLogin = () => ( // eslint-disable-line
   {

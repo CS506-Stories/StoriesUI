@@ -1,4 +1,4 @@
-import LOGIN, SIGNUP, LOGOUT, from './actionTypes';
+import { LOGIN, SIGNUP, LOGOUT, } from './actionTypes';
 
 const initialState = {
   reduxExample: 'Not Pressed Yet!',
