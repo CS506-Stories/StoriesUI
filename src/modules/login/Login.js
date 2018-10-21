@@ -11,7 +11,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './styles';
 import { updateLogin } from './actions';
-
+import validation from './Validation';
+import validate from './Validate';
 
 export class Login extends Component {
   validateEmail(email) {
@@ -55,6 +56,10 @@ export class Login extends Component {
       isLoading: false,
       isEmailValid: false,
       isPasswordValid: false,
+      handleError: '',
+      emailError: '',
+      passwordError: '',
+
     };
   }
   render()
@@ -63,7 +68,7 @@ export class Login extends Component {
       <ImageBackground source={require('../../../assets/img/tempBack.jpeg')} style={styles.back}>
       {
         this.state.loaded
-        ? <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }} scrollEnabled={false}>
+        ? <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }} scrollEnabled={true}>
             <StatusBar barStyle='light-content'/>
               <Image source={require('../../../assets/img/tempLogo.png')} style={styles.logoimg}/>
               { this.state.displayLogin
@@ -98,12 +103,14 @@ export class Login extends Component {
                         ref={input => this.handleInput = input}
                         onSubmitEditing={ () => this.passwordInput.focus()}
                       />
+                      this.state.handleError ? <Text style={styles.hide}>{this.state.handleError}</Text> : null
                       <TextInput style={styles.password} secureTextEntry={true} placeholder='Password'
                         returnKeyType={'done'}
                         onChangeText={this.handlePassword}
                         ref={input => this.passwordInput = input}
                         // onSubmitEditing={() => this.login()}
                       />
+                      this.state.handlePassword ? <Text style={styles.hide}>{this.state.handlePassword}</Text> : null
                     </View>
                   : <View>
                       <TextInput style={styles.username} placeholder='Handle'
@@ -117,6 +124,7 @@ export class Login extends Component {
                         onSubmitEditing={ () => this.emailInput.focus() }
                         returnKeyType='next'
                       />
+                      this.state.handleError ? <Text style={styles.hide}>{this.state.handleError}</Text> : null
                       <TextInput style={styles.username} secureTextEntry={false} placeholder={'Email'}
                         keyboardAppearance='light'
                         autoFocus={false}
@@ -130,6 +138,7 @@ export class Login extends Component {
                         onChangeText={this.handleEmail}
                         errorMessage={this.state.isEmailValid ? null : 'Please enter a valid email address'}
                       />
+                      this.state.handleEmail ? <Text style={styles.hide}>{this.state.handleEmail}</Text> : null
                       <TextInput style={styles.username} secureTextEntry={true} placeholder='Password'
                         ref={input => this.passwordInput = input}
                         returnKeyType={'done'}
@@ -137,6 +146,7 @@ export class Login extends Component {
                         errorMessage={this.state.isPasswordValid ? null : 'Please enter a password with more than 8 characters'}
                         // onSubmitEditing={() => this.signUp()}
                       />
+                      this.state.handlePassword ? <Text style={styles.hide}>{this.state.handlePassword}</Text> : null
                     </View>
                 }
                 </View>

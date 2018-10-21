@@ -5,6 +5,9 @@ const styles = StyleSheet.create({
     borderRadius: 400,
     backgroundColor: '#dadfe1',
   },
+  hide: {
+    height: 0,
+  },
   options: {
     flexDirection: 'row',
     alignSelf: 'center',
