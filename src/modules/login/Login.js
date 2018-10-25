@@ -3,8 +3,6 @@ import {
   Text, View, Button, ImageBackground, TextInput, StatusBar, Image,
 } from 'react-native';
 
-import DropdownAlert from 'react-native-dropdownalert';
-
 import {
   KeyboardAwareScrollView,
 } from 'react-native-keyboard-aware-scroll-view';
@@ -20,7 +18,6 @@ export class Login extends Component {
     return re.test(email);
   }
   handleSubmit(){
-    this.dropdown.alertWithType(this.validationOptions.type, this.validationOptions.title, this.validationOptions.message)
     if(this.state.displayLogin){
       this.props.login(this.state.handle, this.state.password)
     }
@@ -30,11 +27,37 @@ export class Login extends Component {
         isHandleValid: true,
         isEmailValid: this.validateEmail(this.state.email),
         isPasswordValid: this.state.password.length >= 8,
+      }, () => {
+        if(this.state.isEmailValid && this.state.isPasswordValid && this.state.isHandleValid)
+        {
+          // this.props.signUp(this.state.handle, this.state.email, this.state.password)
+          alert('great success')
+        }
+        else {
+          if (!this.state.isEmailValid && !this.state.isPasswordValid && !this.state.isHandleValid) {
+            alert('email, password, and handle invalid')
+          }
+          else if (!this.state.isEmailValid && !this.state.isPasswordValid) {
+            alert('email and password invalid')
+          }
+          else if (!this.state.isPasswordValid && !this.state.isHandleValid) {
+            alert('password and handle invalid')
+          }
+          else if (!this.state.isEmailValid && !this.state.isHandleValid) {
+            alert('email and handle invalid')
+          }
+          else if (!this.state.isEmailValid) {
+            alert('email invalid')
+          }
+          else if (!this.state.isPasswordValid) {
+            alert('password invalid')
+          }
+          else if (!this.state.isHandleValid) {
+            alert('handle invalid')
+          }
+        }
       });
-      if(this.isEmailValid && this.isPasswordValid)
-      {
-        this.props.signUp(this.state.handle, this.state.email, this.state.password)
-      }
+
     }
   }
   handleEmail = (text) => {
@@ -59,15 +82,8 @@ export class Login extends Component {
       isPasswordValid: true,
       isHandleValid: true,
     };
-    const validationOptions =
-    [
-      {key: 0, backgroundColor: '#cc3232', type: 'error', title: 'Error', message: 'Please enter a password longer than 8 characters.'},
-      {key: 1, backgroundColor: '#cc3232', type: 'error', title: 'Error', message: 'That handle is already taken. Please choose another!'},
-      {key: 2, backgroundColor: '#cc3232', type: 'error', title: 'Error', message: 'Please enter a valid email.'},
-      {key: 3, backgroundColor: '#cc3232', type: 'error', title: 'Error', message: 'Please enter a valid email and a password longer than 8 characters'},
-      {key: 4, backgroundColor: '#cc3232', type: 'error', title: 'Error', message: 'That username password combination is not valid. Please try again.'},
 
-    ]
+
   }
   render()
   {
@@ -158,26 +174,12 @@ export class Login extends Component {
                   title={this.state.displayLogin ? 'Login' : 'Sign up'} color="#ffffff"/>
                 </View>
 
-                <DropdownAlert type='error'/>
               </KeyboardAwareScrollView>
             :
             // TODO add loading wheel
             <Text>Loading...</Text>
           }
-          //dropdown alert
-          <View>
-          {
-            (this.state.isPasswordValid && this.state.isHandleValid && this.state.isEmailValid)
-            ?
-              <DropdownAlert
-                ref={(ref) => this.dropdown = ref}
-                showCancel={true}
-                closeInterval={4000}
-              />
-            :
-            null
-          }
-          </View>
+
 
         </ImageBackground>
     );
