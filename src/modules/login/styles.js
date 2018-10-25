@@ -2,8 +2,9 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   active: {
-    borderRadius: 400,
-    backgroundColor: '#dadfe1',
+    // borderRadius: 400,
+    opacity: 1,
+    backgroundColor: 'white',
   },
   hide: {
     height: 0,
@@ -20,17 +21,19 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '30%',
     padding: 10,
-    borderColor: '#ffffff',
+    borderColor: 'transparent',
     borderWidth: 0.4,
     borderRadius: 400,
+    opacity: 0.5,
   },
   signup: {
     flex: 1,
     width: '30%',
     padding: 10,
-    borderColor: '#ffffff',
+    borderColor: 'transparent',
     borderWidth: 0.4,
     borderRadius: 400,
+    opacity: 0.5,
   },
   back: {
     width: '100%',
