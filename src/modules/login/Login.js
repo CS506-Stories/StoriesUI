@@ -11,8 +11,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './styles';
 import { updateLogin } from './actions';
-import validation from './Validation';
-import validate from './Validate';
 
 export class Login extends Component {
   validateEmail(email) {
@@ -56,10 +54,6 @@ export class Login extends Component {
       isLoading: false,
       isEmailValid: false,
       isPasswordValid: false,
-      handleError: '',
-      emailError: '',
-      passwordError: '',
-
     };
   }
   render()
@@ -110,7 +104,6 @@ export class Login extends Component {
                         ref={input => this.passwordInput = input}
                         // onSubmitEditing={() => this.login()}
                       />
-                      this.state.handlePassword ? <Text style={styles.hide}>{this.state.handlePassword}</Text> : null
                     </View>
                   : <View>
                       <TextInput style={styles.username} placeholder='Handle'
@@ -124,7 +117,6 @@ export class Login extends Component {
                         onSubmitEditing={ () => this.emailInput.focus() }
                         returnKeyType='next'
                       />
-                      this.state.handleError ? <Text style={styles.hide}>{this.state.handleError}</Text> : null
                       <TextInput style={styles.username} secureTextEntry={false} placeholder={'Email'}
                         keyboardAppearance='light'
                         autoFocus={false}
@@ -138,7 +130,6 @@ export class Login extends Component {
                         onChangeText={this.handleEmail}
                         errorMessage={this.state.isEmailValid ? null : 'Please enter a valid email address'}
                       />
-                      this.state.handleEmail ? <Text style={styles.hide}>{this.state.handleEmail}</Text> : null
                       <TextInput style={styles.username} secureTextEntry={true} placeholder='Password'
                         ref={input => this.passwordInput = input}
                         returnKeyType={'done'}
@@ -146,7 +137,6 @@ export class Login extends Component {
                         errorMessage={this.state.isPasswordValid ? null : 'Please enter a password with more than 8 characters'}
                         // onSubmitEditing={() => this.signUp()}
                       />
-                      this.state.handlePassword ? <Text style={styles.hide}>{this.state.handlePassword}</Text> : null
                     </View>
                 }
                 </View>
