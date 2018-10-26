@@ -1,8 +1,6 @@
 
-const LOGIN = 'login';
-const SIGNUP = 'signup';
-const LOGOUT = 'logout';
+const UPDATEGENERIC = 'updategeneric';
+const HANDLESUBMIT = 'handlesubmit';
 
 
-
-export default {LOGIN,SIGNUP,LOGOUT};
+export default {HANDLESUBMIT, UPDATEGENERIC};

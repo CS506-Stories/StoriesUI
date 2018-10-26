@@ -10,56 +10,10 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './styles';
-import { updateLogin } from './actions';
+import { updateGeneric, handleSubmit } from './actions';
+import { displayResult } from './functions';
 
 export class Login extends Component {
-  validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-  }
-  handleSubmit(){
-    if(this.state.displayLogin){
-      this.props.login(this.state.handle, this.state.password)
-    }
-    else {
-      this.setState({
-        // TODO DB checks
-        isHandleValid: true,
-        isEmailValid: this.validateEmail(this.state.email),
-        isPasswordValid: this.state.password.length >= 8,
-      }, () => {
-        if(this.state.isEmailValid && this.state.isPasswordValid && this.state.isHandleValid)
-        {
-          // this.props.signUp(this.state.handle, this.state.email, this.state.password)
-          alert('great success')
-        }
-        else {
-          if (!this.state.isEmailValid && !this.state.isPasswordValid && !this.state.isHandleValid) {
-            alert('email, password, and handle invalid')
-          }
-          else if (!this.state.isEmailValid && !this.state.isPasswordValid) {
-            alert('email and password invalid')
-          }
-          else if (!this.state.isPasswordValid && !this.state.isHandleValid) {
-            alert('password and handle invalid')
-          }
-          else if (!this.state.isEmailValid && !this.state.isHandleValid) {
-            alert('email and handle invalid')
-          }
-          else if (!this.state.isEmailValid) {
-            alert('email invalid')
-          }
-          else if (!this.state.isPasswordValid) {
-            alert('password invalid')
-          }
-          else if (!this.state.isHandleValid) {
-            alert('handle invalid')
-          }
-        }
-      });
-
-    }
-  }
   handleEmail = (text) => {
     this.setState({ email: text })
   }
@@ -69,21 +23,19 @@ export class Login extends Component {
   handleHandle = (text) => {
     this.setState({ handle: text })
   }
+  submit = () => {
+    handleSubmit(this.state.handle, this.state.email, this.state.password);
+    displayResult(this.state.displayLogin, this.state.email, this.state.password, this.state.handle);
+  }
   constructor(props) {
     super(props);
     this.state = {
-      displayLogin: true,
-      loaded: true,
       email: '',
       handle: '',
       password: '',
-      isLoading: false,
-      isEmailValid: true,
-      isPasswordValid: true,
-      isHandleValid: true,
+      loaded: true,
+      displayLogin: true,
     };
-
-
   }
   render()
   {
@@ -170,7 +122,7 @@ export class Login extends Component {
                 }
                 </View>
                 <View style={styles.submit}>
-                  <Button onPress={() => this.handleSubmit()}
+                  <Button onPress={this.submit}
                   title={this.state.displayLogin ? 'Login' : 'Sign up'} color="#ffffff"/>
                 </View>
 
@@ -179,8 +131,6 @@ export class Login extends Component {
             // TODO add loading wheel
             <Text>Loading...</Text>
           }
-
-
         </ImageBackground>
     );
   }
@@ -188,10 +138,18 @@ export class Login extends Component {
 
 function mapStateToProps(state) {
   return {
-    reduxExample: state.loginReducer.reduxExample,
-    handle: state.loginReducer.handle,
-    isLoggedIn: state.loginReducer.isLoggedIn,
+    isEmailValid: state.loginReducer.isEmailValid,
+    isHandleValid: state.loginReducer.isHandleValid,
+    isPasswordValid: state.loginReducer.isPasswordValid,
   };
 }
 
-export default connect(mapStateToProps, { updateLogin })(Login);
+function mapDispatchToProps(dispatch) {
+  return {
+    update: (name, value) => dispatch(updateGeneric(name, value)),
+    handleSubmit: (handle, email, pass) => dispatch(handleSubmit(handle, email, pass)),
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

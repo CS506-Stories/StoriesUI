@@ -1,33 +1,37 @@
-import { LOGIN, SIGNUP, LOGOUT, } from './actionTypes';
+import { HANDLESUBMIT, UPDATEGENERIC, } from './actionTypes';
 
 const initialState = {
-  reduxExample: 'Not Pressed Yet!',
+  displayLogin: true,
+  loaded: true,
+  email: '',
   handle: '',
-  isloggedIn: false,
+  password: '',
+  isLoading: false,
+  isEmailValid: true,
+  isPasswordValid: true,
+  isHandleValid: true,
+
 };
+export function validateEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-   case LOGIN:
-   //TODO dbcall
-     return {
+   case UPDATEGENERIC:
+    return Object.assign({}, state, {
+      ...state,
+      [action.name]: action.value
+    });
+   case HANDLESUBMIT:
+      return Object.assign({}, state, {
        ...state,
-       isLoggedIn: true,
-       handle: action.handle,
-     };
-   case LOGOUT:
-   //TODO dbcall
-     return {
-       ...state, isLoggedIn: false
-     };
-   case SIGNUP:
-    //TODO dbcall
-
-     return {
-       ...state,
-       isLoggedIn: true,
-       handle: action.handle,
-     };
+       //TODO db checks
+       isHandleValid: true,
+       isEmailValid: this.validateEmail(action.email),
+       isPasswordValid: action.pass.length >= 8,
+     });
     default:
       return state;
   }

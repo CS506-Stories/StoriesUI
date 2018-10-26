@@ -1,18 +1,8 @@
-import { LOGIN, SIGNUP, LOGOUT, } from './actionTypes';
+import { HANDLESUBMIT, UPDATEGENERIC, } from './actionTypes';
 
-export const updateLogin = () => ( // eslint-disable-line
-  {
-    type: LOGIN,
-    payload: {
-      str: 'Button Pressed!',
-    },
-    type: SIGNUP,
-    payload: {
-      str: 'Button Pressed!',
-    },
-    type: LOGOUT,
-    payload: {
-      str: 'Button Pressed!',
-    },
-  }
-);
+export function updateGeneric(name,value) {
+  return { type: UPDATE_GENERIC, name, value}
+}
+export function handleSubmit(handle, email, password) {
+  return { type: HANDLESUBMIT, handle, email, password}
+}
