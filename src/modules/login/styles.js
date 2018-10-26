@@ -6,9 +6,6 @@ const styles = StyleSheet.create({
     opacity: 1,
     backgroundColor: 'white',
   },
-  hide: {
-    height: 0,
-  },
   options: {
     flexDirection: 'row',
     alignSelf: 'center',
@@ -53,7 +50,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 30,
+    minWidth: '90%',
+    minHeight: '50%',
+    maxHeight: '90%',
     borderRadius: 40,
   },
   username: {
@@ -78,9 +77,9 @@ const styles = StyleSheet.create({
     margin: 10,
     borderColor: '#282728',
     padding: 10,
-    borderRadius: 40,
+    borderRadius: 20,
     borderWidth: 0.8,
-    width: '80%',
+    minWidth: '80%',
     marginBottom: 10,
     alignSelf: 'center',
     backgroundColor: '#112D4E',

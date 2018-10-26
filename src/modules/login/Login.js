@@ -8,7 +8,6 @@ import {
 } from 'react-native-keyboard-aware-scroll-view';
 
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import styles from './styles';
 import { updateGeneric, handleSubmit } from './actions';
 import { displayResult } from './functions';
@@ -25,6 +24,7 @@ export class Login extends Component {
   }
   submit = () => {
     handleSubmit(this.state.handle, this.state.email, this.state.password);
+
     displayResult(this.state.displayLogin, this.state.email, this.state.password, this.state.handle);
   }
   constructor(props) {
@@ -78,7 +78,6 @@ export class Login extends Component {
                         ref={input => this.handleInput = input}
                         onSubmitEditing={ () => this.passwordInput.focus()}
                       />
-                      this.state.handleError ? <Text style={styles.hide}>{this.state.handleError}</Text> : null
                       <TextInput style={styles.password} secureTextEntry={true} placeholder='Password'
                         returnKeyType={'done'}
                         onChangeText={this.handlePassword}
@@ -120,12 +119,12 @@ export class Login extends Component {
                       />
                     </View>
                 }
-                </View>
                 <View style={styles.submit}>
                   <Button onPress={this.submit}
                   title={this.state.displayLogin ? 'Login' : 'Sign up'} color="#ffffff"/>
                 </View>
 
+                </View>
               </KeyboardAwareScrollView>
             :
             // TODO add loading wheel
