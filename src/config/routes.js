@@ -1,4 +1,32 @@
 import React from 'react';
-import Splash from '../modules/splash/Splash';
+import { Router, Scene, Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default () => (<Splash />);
+import Splash from '../modules/splash/Splash';
+import Profile from '../modules/profile/Profile';
+
+
+const MainRouter = () => (
+  <Router>
+    <Scene key="root">
+      <Scene
+        key="splash"
+        component={Splash}
+        title="Splash"
+        renderRightButton={<Icon name="user-circle" size={30} style={{ paddingRight: 16 }} onPress={() => Actions.profile()} />}
+        renderLeftButton={<Icon name="camera" size={30} style={{ paddingLeft: 16 }} />}
+        initial
+      />
+
+      <Scene
+        key="profile"
+        component={Profile}
+        title="Profile"
+      />
+
+    </Scene>
+  </Router>
+);
+
+
+export default MainRouter;
