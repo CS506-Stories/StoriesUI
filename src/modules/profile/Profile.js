@@ -3,46 +3,32 @@ import {
   Text, View, FlatList, Image, ScrollView,
 } from 'react-native';
 
-const Profile = (props) => (
+import styles from './styles';
+
+const Profile = () => (
   <ScrollView>
     <View style={{ alignContent: 'stretch', flexDirection: 'column' }}>
       {
         // Spacer for menu bar
       }
       <View
-        style={{ height: 64, backgroundColor: 'powderblue' }}
+        style={styles.viewSpacer}
       />
     </View>
-    <View style={{
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'flex-end',
-      margin: 8,
-    }}
-    >
+    <View style={styles.settingsContainer}>
       {
         // Settings button
       }
       <View
-        style={{ width: 64, height: 64, backgroundColor: 'skyblue' }}
+        style={styles.viewSpacerWidth}
       />
     </View>
-    <View style={{
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}
-    >
+    <View style={styles.profileContainer}>
       {
         // Profile, FullName and handle
       }
       <View
-        style={{
-          width: 128,
-          height: 128,
-          backgroundColor: 'skyblue',
-          marginTop: 16,
-        }}
+        style={styles.profileImage}
       />
       <Text>
         Full Name
@@ -51,32 +37,16 @@ const Profile = (props) => (
         @handle
       </Text>
     </View>
-    <View style={{
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      alignItems: 'center',
-      marginTop: 16,
-    }}
-    >
-      <View style={{
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-      >
+    <View style={styles.myStoriesContainer}>
+      <View style={styles.profileContainer}>
         <Text>
           My Stories
         </Text>
         <View
-          style={{ width: 128, height: 64, backgroundColor: 'skyblue' }}
+          style={styles.myStoriesLong}
         />
       </View>
-      <View style={{
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-      >
+      <View style={styles.profileContainer}>
         <Text>
           Score
         </Text>
@@ -86,20 +56,8 @@ const Profile = (props) => (
         />
       </View>
     </View>
-    <View style={{
-      flexDirection: 'column',
-      justifyContent: 'flex-start',
-      alignItems: 'stretch',
-    }}
-    >
-      <View style={{
-        height: 64,
-        marginTop: 32,
-        justifyContent: 'center',
-        backgroundColor: 'skyblue',
-
-      }}
-      >
+    <View style={styles.friendsContainer}>
+      <View style={styles.friends}>
         <Text>
           Friends
         </Text>
