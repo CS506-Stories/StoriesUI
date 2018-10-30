@@ -34,3 +34,5 @@ const MainRouter = () => (
     </Scene>
   </Router>
 );
+
+export default MainRouter;
