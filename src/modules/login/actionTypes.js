@@ -3,6 +3,6 @@ const UPDATEGENERIC = 'updategeneric';
 const HANDLESUBMIT = 'handlesubmit';
 
 
-export default {
+export {
   HANDLESUBMIT, UPDATEGENERIC,
 };

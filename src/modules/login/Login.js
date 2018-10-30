@@ -69,7 +69,7 @@ export class Login extends Component {
                       autoCorrect={false}
                       inputStyle={{ marginLeft: 10 }}
                       onChangeText={this.handleHandle}
-                      ref={input => this.handleInput = input}
+                      ref={input => { this.handleInput = input; }}
                       onSubmitEditing={() => this.passwordInput.focus()}
                     />
                     <TextInput
@@ -78,7 +78,7 @@ export class Login extends Component {
                       placeholder="Password"
                       returnKeyType="done"
                       onChangeText={(text) => this.setState({ password: text })}
-                      ref={input => this.passwordInput = input}
+                      ref={input => { this.passwordInput = input; }}
                     />
                   </View>
                 ) : (
@@ -92,7 +92,7 @@ export class Login extends Component {
                       autoCorrect={false}
                       inputStyle={{ marginLeft: 10 }}
                       onChangeText={(text) => this.setState({ handle: text })}
-                      ref={input => this.handleInput = input}
+                      ref={input => { this.handleInput = input; }}
                       onSubmitEditing={() => this.emailInput.focus()}
                       returnKeyType="next"
                     />
@@ -107,7 +107,7 @@ export class Login extends Component {
                       keyboardType="email-address"
                       returnKeyType="next"
                       inputStyle={{ marginLeft: 10 }}
-                      ref={input => this.emailInput = input}
+                      ref={input => { this.emailInput = input; }}
                       onSubmitEditing={() => this.passwordInput.focus()}
                       onChangeText={(text) => this.setState({ email: text })}
                       errorMessage={this.state.isEmailValid ? null : 'Please enter a valid email address'}
@@ -116,7 +116,7 @@ export class Login extends Component {
                       style={styles.username}
                       secureTextEntry
                       placeholder="Password"
-                      ref={input => this.passwordInput = input}
+                      ref={input => { this.passwordInput = input; }}
                       returnKeyType="done"
                       onChangeText={(text) => this.setState({ password: text })}
                       errorMessage={!this.state.isPasswordValid ? 'Please enter a password with more than 8 characters' : null}
