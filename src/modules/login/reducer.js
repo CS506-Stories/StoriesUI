@@ -12,11 +12,6 @@ const initialState = {
   isHandleValid: true,
 
 };
-export function validateEmail(email) {
-  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(email);
-}
-
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
    case UPDATEGENERIC:
@@ -27,10 +22,10 @@ const loginReducer = (state = initialState, action) => {
    case HANDLESUBMIT:
       return Object.assign({}, state, {
        ...state,
-       //TODO db checks
+       //TODO db checks for handle valid
        isHandleValid: true,
-       isEmailValid: this.validateEmail(action.email),
-       isPasswordValid: action.pass.length >= 8,
+       isEmailValid: action.email,
+       isPasswordValid: action.password,
      });
     default:
       return state;

@@ -10,22 +10,12 @@ import {
 import { connect } from 'react-redux';
 import styles from './styles';
 import { updateGeneric, handleSubmit } from './actions';
-import { displayResult } from './functions';
+import { displayResult, validateEmail } from './functions';
 
 export class Login extends Component {
-  handleEmail = (text) => {
-    this.setState({ email: text })
-  }
-  handlePassword = (text) => {
-    this.setState({ password: text })
-  }
-  handleHandle = (text) => {
-    this.setState({ handle: text })
-  }
   submit = () => {
     handleSubmit(this.state.handle, this.state.email, this.state.password);
-
-    displayResult(this.state.displayLogin, this.state.email, this.state.password, this.state.handle);
+    displayResult(this.state.displayLogin, validateEmail(this.state.email), (this.state.password.length >= 8), this.state.handle);
   }
   constructor(props) {
     super(props);
@@ -80,9 +70,8 @@ export class Login extends Component {
                       />
                       <TextInput style={styles.password} secureTextEntry={true} placeholder='Password'
                         returnKeyType={'done'}
-                        onChangeText={this.handlePassword}
+                        onChangeText={(text) => this.setState({ password: text })}
                         ref={input => this.passwordInput = input}
-                        // onSubmitEditing={() => this.login()}
                       />
                     </View>
                   : <View>
@@ -92,7 +81,7 @@ export class Login extends Component {
                         autoCapitalize='none'
                         autoCorrect={false}
                         inputStyle={{marginLeft: 10}}
-                        onChangeText={this.handleHandle}
+                        onChangeText={(text) => this.setState({ handle: text })}
                         ref={input => this.handleInput = input}
                         onSubmitEditing={ () => this.emailInput.focus() }
                         returnKeyType='next'
@@ -107,27 +96,25 @@ export class Login extends Component {
                         inputStyle={{marginLeft: 10}}
                         ref={input => this.emailInput = input}
                         onSubmitEditing={ () => this.passwordInput.focus() }
-                        onChangeText={this.handleEmail}
+                        onChangeText={(text) => this.setState({ email: text })}
                         errorMessage={this.state.isEmailValid ? null : 'Please enter a valid email address'}
                       />
                       <TextInput style={styles.username} secureTextEntry={true} placeholder='Password'
                         ref={input => this.passwordInput = input}
                         returnKeyType={'done'}
-                        onChangeText={this.handlePassword}
+                        onChangeText={(text) => this.setState({ password: text })}
                         errorMessage={!this.state.isPasswordValid ? 'Please enter a password with more than 8 characters' : null}
-                        // onSubmitEditing={() => this.signUp()}
                       />
                     </View>
                 }
+                </View>
                 <View style={styles.submit}>
                   <Button onPress={this.submit}
                   title={this.state.displayLogin ? 'Login' : 'Sign up'} color="#ffffff"/>
                 </View>
-
-                </View>
               </KeyboardAwareScrollView>
             :
-            // TODO add loading wheel
+            // TODO add loading wheel/ loading screen
             <Text>Loading...</Text>
           }
         </ImageBackground>
