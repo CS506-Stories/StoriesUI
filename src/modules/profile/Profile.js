@@ -2,25 +2,23 @@ import React from 'react';
 import {
   Text, View, FlatList, Image, ScrollView,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Actions } from 'react-native-router-flux';
 
 import styles from './styles';
 
 const Profile = () => (
   <ScrollView>
-    <View style={{ alignContent: 'stretch', flexDirection: 'column' }}>
-      {
-        // Spacer for menu bar
-      }
-      <View
-        style={styles.viewSpacer}
-      />
-    </View>
     <View style={styles.settingsContainer}>
       {
         // Settings button
       }
-      <View
-        style={styles.viewSpacerWidth}
+      <Icon.Button
+        name="cog"
+        size={30}
+        backgroundColor="#00000000"
+        color="black"
+        onPress={() => Actions.settings()}
       />
     </View>
     <View style={styles.profileContainer}>

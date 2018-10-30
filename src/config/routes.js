@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import routerStyles from './routerStyles';
 import Splash from '../modules/splash/Splash';
 import Profile from '../modules/profile/Profile';
-
+import Settings from '../modules/settings/Settings';
 
 const MainRouter = () => (
   <Router>
@@ -23,6 +23,12 @@ const MainRouter = () => (
         key="profile"
         component={Profile}
         title="Profile"
+      />
+
+      <Scene
+        key="settings"
+        component={Settings}
+        title="Settings"
       />
 
     </Scene>
