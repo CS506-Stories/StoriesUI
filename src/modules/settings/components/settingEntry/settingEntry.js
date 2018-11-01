@@ -11,7 +11,7 @@ const SettingEntry = (props) => (
     {
       // TODO : replace fontsize with something scalable.
     }
-    <Text style={{ fontSize:16 }} key={props.index}>{props.item}</Text>
+    <Text style={{ fontSize: 16 }} key={props.index}>{props.item}</Text>
     <Switch />
   </View>
 );
