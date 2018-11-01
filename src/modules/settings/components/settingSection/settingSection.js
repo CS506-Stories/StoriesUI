@@ -13,7 +13,7 @@ const SettingSection = (props) => (
     {
       // TODO : replace fontsize with something scalable.
     }
-    <Text style={{ fontWeight: 'bold', fontSize: 20}}>{props.title}</Text>
+    <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{props.title}</Text>
   </View>
 );
 
