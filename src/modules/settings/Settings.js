@@ -12,7 +12,8 @@ const Settings = () => (
     style={styles.container}
   >
     <SectionList
-      renderItem={({ item, index, section }) => <SettingEntry index={index} item={item} section={section} />}
+      renderItem={
+        ({ item, index, section }) => <SettingEntry index={index} item={item} section={section} />}
       renderSectionHeader={({ section: { title } }) => (
         <SettingSection title={title} />
       )}
