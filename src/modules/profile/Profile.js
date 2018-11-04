@@ -1,14 +1,18 @@
 import React from 'react';
 import {
-  Text, View, FlatList, Image, ScrollView,
+  Text, View, Image,
 } from 'react-native';
+import {
+  List, H2, Button, Content,
+} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
 
+import FriendEntry from './friends/friendEntry';
 import styles from './styles';
 
 const Profile = () => (
-  <ScrollView>
+  <Content>
     <View style={styles.settingsContainer}>
       {
         // Settings button
@@ -56,26 +60,37 @@ const Profile = () => (
     </View>
     <View style={styles.friendsContainer}>
       <View style={styles.friends}>
-        <Text>
+        <H2 style={styles.friendHeader}>
           Friends
-        </Text>
-
+        </H2>
+        <View style={styles.friendHeaderButtons}>
+          <Button>
+            <Icon name="plus" style={styles.friendHeaderIcon} />
+          </Button>
+          <Button danger>
+            <Icon name="minus" style={styles.friendHeaderIcon} />
+          </Button>
+        </View>
       </View>
-      <FlatList
-        data={[
-          { key: 'Devin' },
-          { key: 'Jackson' },
-          { key: 'James' },
-          { key: 'Joel' },
-          { key: 'John' },
-          { key: 'Jillian' },
-          { key: 'Jimmy' },
-          { key: 'Julie' },
-        ]}
-        renderItem={({ item }) => <View style={{ backgroundColor: 'steelblue', height: 32, justifyContent: 'center' }}><Text style={{ marginLeft: 4 }}>{item.key}</Text></View>}
-      />
+      <List>
+        <FriendEntry
+          uri="https://facebook.github.io/react/logo-og.png"
+          name="Test"
+          note="This is a test friend"
+        />
+        <FriendEntry
+          uri="https://facebook.github.io/react/logo-og.png"
+          name="Test"
+          note="This is a test friend"
+        />
+        <FriendEntry
+          uri="https://facebook.github.io/react/logo-og.png"
+          name="Test"
+          note="This is a test friend"
+        />
+      </List>
     </View>
-  </ScrollView>
+  </Content>
 );
 
 export default Profile;

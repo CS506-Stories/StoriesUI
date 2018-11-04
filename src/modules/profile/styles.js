@@ -50,8 +50,21 @@ const styles = StyleSheet.create({
   friends: {
     height: 64,
     marginTop: 32,
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     backgroundColor: 'skyblue',
+  },
+  friendHeaderButtons: {
+    flexDirection: 'row',
+    marginRight: 16,
+  },
+  friendHeaderIcon: {
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
+  friendHeader: {
+    paddingLeft: 12,
   },
 
 });
