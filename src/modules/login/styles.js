@@ -14,8 +14,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '80%',
-    padding: 20,
   },
   login: {
     flex: 1,
@@ -48,39 +46,18 @@ const styles = StyleSheet.create({
     marginTop: 100,
   },
   container: {
-    backgroundColor: 'rgba(52, 52, 52, 0.2)'
+    justifyContent: 'center',
   },
-  username: {
-    borderColor: '#dadfe1',
-    padding: 20,
-    borderRadius: 4,
-    borderWidth: 0.8,
-    minWidth: '80%',
-    marginBottom: 10,
-    backgroundColor: '#ffffff',
-  },
-  password: {
-    borderColor: '#dadfe1',
-    padding: 20,
-    borderRadius: 4,
-    borderWidth: 0.8,
-    minWidth: '80%',
-    marginBottom: 10,
-    backgroundColor: '#ffffff',
-  },
+
   submit: {
     backgroundColor: '#646569',
-  },
-  butColor: {
-    color: '#ffffff',
   },
   logoimg: {
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 100,
-    height: 100,
-
+    width: 130,
+    height: 130,
     marginTop: '10%',
   },
 });

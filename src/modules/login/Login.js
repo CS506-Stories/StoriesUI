@@ -8,6 +8,9 @@ import {
   Container, Header, Content, Form, Item, Input, Label, Button, Text, Footer, FooterTab,
 } from 'native-base';
 
+import { Col, Row, Grid } from 'react-native-easy-grid';
+
+
 import { connect } from 'react-redux';
 import styles from './styles';
 import { updateGeneric, handleSubmit } from './actions';
@@ -34,18 +37,23 @@ export class Login extends Component {
         <ImageBackground source={tempBack} style={styles.back}>
           <Content>
           <Image source={tempLogo} style={styles.logoimg} />
-            <Button
-              onPress={() => this.setState({ displayLogin: true })}
-              light
-            >
-              <Text>Login</Text>
-            </Button>
-            <Button
-              onPress={() => this.setState({ displayLogin: false })}
-              light
-            >
-              <Text>Sign up</Text>
-            </Button>
+
+
+                  <Button stye={styles.login}
+                    onPress={() => this.setState({ displayLogin: true })}
+                    light
+                    >
+                    <Text>Login</Text>
+                  </Button>
+
+                  <Button color="#ffffff"
+                    onPress={() => this.setState({ displayLogin: false })}
+                    light
+                    >
+                    <Text>Sign up</Text>
+                  </Button>
+
+
             <Form>
                <Item floatingLabel>
                  <Label style={styles.light}>Handle</Label>
@@ -56,8 +64,8 @@ export class Login extends Component {
                       autoCapitalize="none"
                       autoCorrect={false}
                       onChangeText={(text) => this.setState({ handle: text })}
-                      onSubmitEditing={() => { this.passwordInput.focus(); }}
                       ref={(input) => { this.handleInput = input; }}
+                      onSubmitEditing={() => this.passwordInput.focus()}
                     />
               </Item>
               {
@@ -66,10 +74,14 @@ export class Login extends Component {
                   <Item>
                   </Item>
                 ) : (
-                  <Item floatingLabel last>
+                  <Item floatingLabel>
                     <Label style={styles.light}>Email</Label>
                     <Input
                       returnKeyType="done"
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      keyboardType="email-address"
+                      returnKeyType="next"
                       onChangeText={(text) => this.setState({ email: text })}
                       ref={(input) => { this.emailInput = input; }}
                     />
