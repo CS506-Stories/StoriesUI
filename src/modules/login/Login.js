@@ -71,8 +71,7 @@ export class Login extends Component {
               {
                 this.state.displayLogin
                 ? (
-                  <Item>
-                  </Item>
+                  null
                 ) : (
                   <Item floatingLabel>
                     <Label style={styles.light}>Email</Label>
