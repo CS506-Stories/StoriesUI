@@ -1,3 +1,5 @@
+import { Actions } from 'react-native-router-flux';
+
 export function validateEmail(email) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; // eslint-disable-line
   return re.test(email);
@@ -6,11 +8,11 @@ export function displayResult(disp, ema, pass, handle) {
   if (disp) {
   // TODO call firebase
   // this.props.login(this.state.handle, this.state.password)
-    alert('great success for login');
+  Actions.splash();
   } else if (ema && pass && handle) {
     // TODO CALL FIREBASE
     // this.props.signUp(this.state.handle, this.state.email, this.state.password)
-    alert('great success for signup.');
+    Actions.splash();
   } else if (!ema && !pass && !handle) {
     alert('email, password, and handle invalid');
   } else if (!ema && !pass) {

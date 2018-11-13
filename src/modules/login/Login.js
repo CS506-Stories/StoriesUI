@@ -83,7 +83,13 @@ export class Login extends Component {
         </Content>
         <Footer>
           <FooterTab>
-            <Button full style={{backgroundColor: '#646569',}}>
+            <Button
+            onPress={() => {
+                    handleSubmit(this.state.handle, this.state.email, this.state.password);
+                    displayResult(this.state.displayLogin, validateEmail(this.state.email),
+                      (this.state.password.length >= 8), this.state.handle);
+                  }}
+            full style={{backgroundColor: '#646569',}}>
               {
                 this.state.displayLogin
                 ? (
