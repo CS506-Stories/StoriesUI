@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 
 import {
-  Image, ImageBackground
+  Image, ImageBackground,
 } from 'react-native';
 
 import {
-  Container, Header, Content, Form, Item, Input, Label, Button, Text, Footer, FooterTab,
+  Container, Content, Form, Item, Input, Label, Button, Text, Footer, FooterTab,
 } from 'native-base';
-
-import { Col, Row, Grid } from 'react-native-easy-grid';
-
 
 import { connect } from 'react-redux';
 import styles from './styles';
@@ -26,7 +23,6 @@ export class Login extends Component {
       email: '',
       handle: '',
       password: '',
-      loaded: true,
       displayLogin: true,
     };
   }
@@ -36,56 +32,52 @@ export class Login extends Component {
       <Container>
         <ImageBackground source={tempBack} style={styles.back}>
           <Content>
-          <Image source={tempLogo} style={styles.logoimg} />
-
-
-                  <Button stye={styles.login}
-                    onPress={() => this.setState({ displayLogin: true })}
-                    light
-                    >
-                    <Text>Login</Text>
-                  </Button>
-
-                  <Button color="#ffffff"
-                    onPress={() => this.setState({ displayLogin: false })}
-                    light
-                    >
-                    <Text>Sign up</Text>
-                  </Button>
-
-
+            <Image source={tempLogo} style={styles.logoimg} />
+            <Button
+              stye={styles.login}
+              onPress={() => this.setState({ displayLogin: true })}
+              light
+            >
+              <Text>Login</Text>
+            </Button>
+            <Button
+              color="#ffffff"
+              onPress={() => this.setState({ displayLogin: false })}
+              light
+            >
+              <Text>Sign up</Text>
+            </Button>
             <Form>
-               <Item floatingLabel>
-                 <Label style={styles.light}>Handle</Label>
-                    <Input
-                      returnKeyType="next"
-                      keyboardAppearance="light"
-                      autoFocus={false}
-                      autoCapitalize="none"
-                      autoCorrect={false}
-                      onChangeText={(text) => this.setState({ handle: text })}
-                      ref={(input) => { this.handleInput = input; }}
-                      onSubmitEditing={() => this.passwordInput.focus()}
-                    />
+              <Item floatingLabel>
+                <Label style={styles.light}>Handle</Label>
+                <Input
+                  returnKeyType="next"
+                  keyboardAppearance="light"
+                  autoFocus={false}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  onChangeText={(text) => this.setState({ handle: text })}
+                  ref={(input) => { this.handleInput = input; }}
+                  onSubmitEditing={() => this.passwordInput.focus()}
+                />
               </Item>
               {
                 this.state.displayLogin
-                ? (
-                  null
-                ) : (
-                  <Item floatingLabel>
-                    <Label style={styles.light}>Email</Label>
-                    <Input
-                      returnKeyType="done"
-                      autoCapitalize="none"
-                      autoCorrect={false}
-                      keyboardType="email-address"
-                      returnKeyType="next"
-                      onChangeText={(text) => this.setState({ email: text })}
-                      ref={(input) => { this.emailInput = input; }}
-                    />
-                  </Item>
-                )
+                  ? (
+                    null
+                  ) : (
+                    <Item floatingLabel>
+                      <Label style={styles.light}>Email</Label>
+                      <Input
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        keyboardType="email-address"
+                        returnKeyType="next"
+                        onChangeText={(text) => this.setState({ email: text })}
+                        ref={(input) => { this.emailInput = input; }}
+                      />
+                    </Item>
+                  )
               }
               <Item floatingLabel>
                 <Label style={styles.light}>Password</Label>
@@ -101,20 +93,21 @@ export class Login extends Component {
           <Footer>
             <FooterTab>
               <Button
-              onPress={() => {
-                      handleSubmit(this.state.handle, this.state.email, this.state.password);
-                      displayResult(this.state.displayLogin, validateEmail(this.state.email),
-                        (this.state.password.length >= 8), this.state.handle);
-                    }}
-              full
-              style={styles.submit}>
+                onPress={() => {
+                  handleSubmit(this.state.handle, this.state.email, this.state.password);
+                  displayResult(this.state.displayLogin, validateEmail(this.state.email),
+                    (this.state.password.length >= 8), this.state.handle);
+                }}
+                full
+                style={styles.submit}
+              >
                 {
                   this.state.displayLogin
-                  ? (
-                    <Text style={styles.light}>Login</Text>
-                  ) : (
-                    <Text style={styles.light}>Sign Up</Text>
-                  )
+                    ? (
+                      <Text style={styles.light}>Login</Text>
+                    ) : (
+                      <Text style={styles.light}>Sign Up</Text>
+                    )
                 }
               </Button>
             </FooterTab>
