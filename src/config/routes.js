@@ -17,7 +17,6 @@ const MainRouter = () => (
         title="Splash"
         renderRightButton={<Icon name="user-circle" size={30} style={routerStyles.rightButtonStyle} onPress={() => Actions.profile()} />}
         renderLeftButton={<Icon name="camera" size={30} style={routerStyles.leftButtonStyle} />}
-        initial
       />
 
       <Scene
@@ -25,6 +24,7 @@ const MainRouter = () => (
         component={Login}
         title="Login"
         hideNavBar
+        initial
       />
 
       <Scene

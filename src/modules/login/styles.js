@@ -45,15 +45,7 @@ const styles = StyleSheet.create({
     marginTop: 100,
   },
   container: {
-    flex: 2,
-    backgroundColor: '#dadfe1',
-    alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minWidth: '90%',
-    minHeight: '35%',
-    maxHeight: '90%',
-    borderRadius: 40,
+    backgroundColor: 'rgba(52, 52, 52, 0.2)'
   },
   username: {
     borderColor: '#dadfe1',
