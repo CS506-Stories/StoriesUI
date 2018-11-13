@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import {
 
-} from 'native-base'
 import {
-  KeyboardAwareScrollView,
-} from 'react-native-keyboard-aware-scroll-view';
+  Image, ImageBackground
+} from 'react-native';
 
 import {
   Container, Header, Content, Form, Item, Input, Label, Button, Text, Footer, FooterTab,
@@ -33,74 +31,84 @@ export class Login extends Component {
   render() {
     return (
       <Container>
-        <Content>
-          <Form>
-             <Item floatingLabel>
-               <Label>Handle</Label>
-                  <Input
-                    returnKeyType="next"
-                    keyboardAppearance="light"
-                    autoFocus={false}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    onChangeText={this.handleHandle}
-                    ref={(input) => { this.handleInput = input }}
-                    onSubmitEditing={() => this.passwordInput.focus()}
-                  />
-            </Item>
-            {
-              this.state.displayLogin
-              ? (
-                <Item>
-                </Item>
-              ) : (
-                <Item floatingLabel last>
-                  <Label>Email</Label>
-                  <Input
-                    returnKeyType="done"
-                    onChangeText={(text) => this.setState({ email: text })}
-                    ref={(input) => { this.emailInput = input }}
-                  />
-                </Item>
-              )
-            }
-            <Item floatingLabel last>
-              <Label>Password</Label>
-              <Input
-                secureTextEntry
-                returnKeyType="done"
-                onChangeText={(text) => this.setState({ password: text })}
-                ref={(input) => { this.passwordInput = input }}
-              />
-            </Item>
-          </Form>
-          <Button
-            onPress={() => this.setState({ displayLogin: false })}
-            small
-            primary>
-            <Text>Sign up</Text>
-          </Button>
-        </Content>
-        <Footer>
-          <FooterTab>
+        <ImageBackground source={tempBack} style={styles.back}>
+          <Content>
+          <Image source={tempLogo} style={styles.logoimg} />
             <Button
-            onPress={() => {
-                    handleSubmit(this.state.handle, this.state.email, this.state.password);
-                    displayResult(this.state.displayLogin, validateEmail(this.state.email),
-                      (this.state.password.length >= 8), this.state.handle);
-                  }}
-            full style={{backgroundColor: '#646569',}}>
+              onPress={() => this.setState({ displayLogin: true })}
+              light
+            >
+              <Text>Login</Text>
+            </Button>
+            <Button
+              onPress={() => this.setState({ displayLogin: false })}
+              light
+            >
+              <Text>Sign up</Text>
+            </Button>
+            <Form>
+               <Item floatingLabel>
+                 <Label style={styles.light}>Handle</Label>
+                    <Input
+                      returnKeyType="next"
+                      keyboardAppearance="light"
+                      autoFocus={false}
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      onChangeText={(text) => this.setState({ handle: text })}
+                      onSubmitEditing={() => { this.passwordInput.focus(); }}
+                      ref={(input) => { this.handleInput = input; }}
+                    />
+              </Item>
               {
                 this.state.displayLogin
                 ? (
-                  <Text style={{color: '#ffffff',}}>Login</Text>
+                  <Item>
+                  </Item>
                 ) : (
-                  <Text style={{color: '#ffffff',}}>Sign Up</Text>
+                  <Item floatingLabel last>
+                    <Label style={styles.light}>Email</Label>
+                    <Input
+                      returnKeyType="done"
+                      onChangeText={(text) => this.setState({ email: text })}
+                      ref={(input) => { this.emailInput = input; }}
+                    />
+                  </Item>
                 )
               }
-            </Button>
-          </FooterTab>
-        </Footer>
+              <Item floatingLabel>
+                <Label style={styles.light}>Password</Label>
+                <Input
+                  secureTextEntry
+                  returnKeyType="done"
+                  ref={(input) => { this.passwordInput = input; }}
+                  onChangeText={(text) => this.setState({ password: text })}
+                />
+              </Item>
+            </Form>
+          </Content>
+          <Footer>
+            <FooterTab>
+              <Button
+              onPress={() => {
+                      handleSubmit(this.state.handle, this.state.email, this.state.password);
+                      displayResult(this.state.displayLogin, validateEmail(this.state.email),
+                        (this.state.password.length >= 8), this.state.handle);
+                    }}
+              full
+              style={styles.submit}>
+                {
+                  this.state.displayLogin
+                  ? (
+                    <Text style={styles.light}>Login</Text>
+                  ) : (
+                    <Text style={styles.light}>Sign Up</Text>
+                  )
+                }
+              </Button>
+            </FooterTab>
+          </Footer>
+        </ImageBackground>
       </Container>
     );
   }

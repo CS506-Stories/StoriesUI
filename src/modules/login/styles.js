@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     opacity: 1,
     backgroundColor: 'white',
   },
+  light: {
+    color: '#ffffff',
+  },
   options: {
     flexDirection: 'row',
     alignSelf: 'center',
@@ -66,15 +69,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   submit: {
-    margin: 10,
-    borderColor: '#282728',
-    padding: 10,
-    borderRadius: 20,
-    borderWidth: 0.8,
-    minWidth: '80%',
-    marginBottom: 10,
-    alignSelf: 'center',
-    backgroundColor: '#112D4E',
+    backgroundColor: '#646569',
   },
   butColor: {
     color: '#ffffff',
@@ -83,8 +78,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '30%',
-    width: '30%',
+    width: 100,
+    height: 100,
+
     marginTop: '10%',
   },
 });
