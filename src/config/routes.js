@@ -6,6 +6,7 @@ import routerStyles from './routerStyles';
 import Splash from '../modules/splash/Splash';
 import Profile from '../modules/profile/Profile';
 import Settings from '../modules/settings/Settings';
+import Camera from '../modules/camera/Camera';
 
 const MainRouter = () => (
   <Router>
@@ -36,4 +37,4 @@ const MainRouter = () => (
 );
 
 
-export default MainRouter;
+export default Camera;
