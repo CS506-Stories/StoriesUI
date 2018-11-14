@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, CameraRoll } from 'react-native';
-import { Expo, Camera, Permissions, ImagePicker } from 'expo';
-import { Container, Header, Content, Button, Icon} from 'native-base';
+import { Text, View, TouchableOpacity } from 'react-native';
+import { Camera, Permissions } from 'expo';
+import { Icon } from 'native-base';
 
 import styles from './styles';
 
@@ -10,46 +10,25 @@ export default class CameraExample extends React.Component {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
   };
-  //Permissions for Camera and CameraRoll
+  // Permissions for Camera
   async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    await Permissions.askAsync(Permissions.CAMERA_ROLL);
     this.setState({ hasCameraPermission: status === 'granted' });
   }
-  //Take Picture and still unsure what to do with it
+
+  // Take Picture and still unsure what to do with it
   takePicture = () => {
-      if(this.camera){
-          this.camera.takePictureAsync({onPictureSaved: this.onPictureSaved});
-      }
+    if (this.camera) {
+      this.camera.takePictureAsync({});
+    }
   };
 
-  onPictureSaved = async photo => {
-      await FileSystem.moveAsync({
-          from: photo.uri,
-          to: '/images',
-      });
-  }
-  //Render Camera -- needed for taking pictures
-  renderCamera = () =>(
-    <View style={{flex: 1}}>
-        <Camera ref={ref => {
-            this.camera = ref;
-        }}>  
-        </Camera>
+  // Render Camera -- needed for taking pictures
+  renderCamera = () => (
+    <View style={{ flex: 1 }}>
+      <Camera ref={ref => { this.camera = ref; }} />
     </View>
   );
-
-//   snap = async () => {
-//       const result = await ImagePicker.launchCameraAsync({
-//           allowEditing: false,
-//           exif: true
-//       });
-
-//       if(!result.cancelled) {
-//           this.setState({image: result.uri});
-//       }
-//       CameraRoll.saveToCameraRoll(this.state.image);
-//   };
 
   render() {
     const { hasCameraPermission } = this.state;
@@ -62,39 +41,35 @@ export default class CameraExample extends React.Component {
       return (
         
         <View style={{ flex: 1 }}>
-          <Camera style={{ flex: 1 }} 
-                type={this.state.type} 
-                ratio={"16:9"}>
+          <Camera
+            style={{ flex: 1 }} 
+            type={this.state.type} 
+            ratio="16:9" >
 
             <View style={styles.header}>
-                <TouchableOpacity style={styles.touchTop}>
-                    <Icon name='md-close' style={styles.exit}/>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.footer}>
-            
+              <TouchableOpacity style={ styles.touchTop }>
+                <Icon name="md-close" style={ styles.exit}/>
+              </TouchableOpacity>
+
               <TouchableOpacity
-                style={styles.touchBottom}
+                style={styles.touchTop}
                 onPress={() => {
                   this.setState({
-                    type: this.state.type === Camera.Constants.Type.back
+                      type: this.state.type === Camera.Constants.Type.back
                       ? Camera.Constants.Type.front
                       : Camera.Constants.Type.back,
-                  });
-                }}>               
-                <Icon name='md-reverse-camera' style={styles.reverse}/>               
+                      });
+                    }}>               
+                  <Icon name='md-reverse-camera' style={styles.reverse}/>               
               </TouchableOpacity>
 
-              <TouchableOpacity
-                  style={styles.touchBottom}
-                  onPress={this.takePicture} >
-                  <Icon name='md-paper' style={styles.paper}/>
-              </TouchableOpacity>
+            </View>
+            <View style={ styles.footer }>                         
 
               <TouchableOpacity
-                  style={styles.touchBottom}
-                  onPress={this.takePicture} >
-                  <Icon name='md-flash' style={styles.flash}/>
+                style={styles.touchBottom}
+                onPress={this.takePicture} >
+                <Icon name='md-paper' style={styles.paper}/>
               </TouchableOpacity>
 
             </View>
