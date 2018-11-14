@@ -10,10 +10,10 @@ import {
   Container, Content, Form, Item, Input, Label, Button, Text, Footer, FooterTab,
 } from 'native-base';
 
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import styles from './styles';
-import { updateGeneric, handleSubmit } from './actions';
-import { displayResult, validateEmail } from './functions';
+import handleSubmit from './actions';
 
 import tempBack from '../../../assets/img/tempBack.jpeg';
 import tempLogo from '../../../assets/img/tempLogo.png';
@@ -133,9 +133,7 @@ export class Login extends Component {
             <FooterTab>
               <Button
                 onPress={() => {
-                  handleSubmit(this.state.handle, this.state.email, this.state.password);
-                  displayResult(this.state.displayLogin, validateEmail(this.state.email),
-                    (this.state.password.length >= 8), this.state.handle);
+                  handleSubmit(this.state.displayLogin, this.state.handle, this.state.email, this.state.password);
                 }}
                 full
                 style={styles.submit}
@@ -158,19 +156,15 @@ export class Login extends Component {
 }
 
 function mapStateToProps(state) {
+  // This is not running
+  console.log("MAPPING STATE");
+  if (state.loginReducer.loggedIn) {
+    Actions.splash();
+  }
+
   return {
-    isEmailValid: state.loginReducer.isEmailValid,
-    isHandleValid: state.loginReducer.isHandleValid,
-    isPasswordValid: state.loginReducer.isPasswordValid,
+    LOGGED_IN: state.loginReducer.loggedIn,
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    update: (name, value) => dispatch(updateGeneric(name, value)),
-    handleSubmit: (handle, email, pass) => dispatch(handleSubmit(handle, email, pass)),
-  };
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, { handleSubmit })(Login);

@@ -1,8 +1,9 @@
 
-const UPDATEGENERIC = 'updategeneric';
 const HANDLESUBMIT = 'handlesubmit';
-
+const LOGGED_IN = 'LOGGED_IN';
+const LOGGED_OUT = 'LOGGED_OUT';
+const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 
 export {
-  HANDLESUBMIT, UPDATEGENERIC,
+  HANDLESUBMIT, LOGGED_IN, LOGGED_OUT, LOGIN_SUCCESS,
 };
