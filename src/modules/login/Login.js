@@ -13,7 +13,7 @@ import {
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import styles from './styles';
-import handleSubmit from './actions';
+import { handleSubmit } from './actions';
 
 import tempBack from '../../../assets/img/tempBack.jpeg';
 import tempLogo from '../../../assets/img/tempLogo.png';
@@ -133,7 +133,7 @@ export class Login extends Component {
             <FooterTab>
               <Button
                 onPress={() => {
-                  handleSubmit(this.state.displayLogin, this.state.handle, this.state.email, this.state.password);
+                  this.props.handleSubmit(this.state.displayLogin, this.state.handle, this.state.email, this.state.password);
                 }}
                 full
                 style={styles.submit}
@@ -157,7 +157,6 @@ export class Login extends Component {
 
 function mapStateToProps(state) {
   // This is not running
-  console.log("MAPPING STATE");
   if (state.loginReducer.loggedIn) {
     Actions.splash();
   }

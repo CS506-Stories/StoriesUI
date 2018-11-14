@@ -22,7 +22,8 @@
     "react-native-router-flux": "^4.0.6",
     "react-native-vector-icons": "^6.0.2",
     "react-redux": "^5.1.1",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",

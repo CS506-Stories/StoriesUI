@@ -11,14 +11,16 @@ const initialState = {
   isEmailValid: true,
   isPasswordValid: true,
   isHandleValid: true,
-
+  loggedIn: false,
+  loggedOut: true,
 };
+
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
       var user = action.user;
-      var refreshToken = user.refreshToken;
-      AsyncStorage.setItem('refreshToken', refreshToken);
+      // var refreshToken = user.refreshToken;
+      // AsyncStorage.setItem('refreshToken', refreshToken);
       AsyncStorage.setItem('user', JSON.stringify(user));
 
       return Object.assign({}, ...state, { loggedIn: true, user: action.user });
