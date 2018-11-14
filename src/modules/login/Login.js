@@ -12,6 +12,7 @@ import {
 
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
 import styles from './styles';
 import { handleSubmit } from './actions';
 
@@ -27,6 +28,18 @@ export class Login extends Component {
       password: '',
       displayLogin: true,
     };
+  }
+
+  componentDidMount() {
+    if (this.props.LOGGED_IN) {
+      Actions.splash();
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.LOGGED_IN) {
+      Actions.splash();
+    }
   }
 
   render() {
@@ -133,7 +146,12 @@ export class Login extends Component {
             <FooterTab>
               <Button
                 onPress={() => {
-                  this.props.handleSubmit(this.state.displayLogin, this.state.handle, this.state.email, this.state.password);
+                  this.props.handleSubmit(
+                    this.state.displayLogin,
+                    this.state.handle,
+                    this.state.email,
+                    this.state.password,
+                  );
                 }}
                 full
                 style={styles.submit}
@@ -155,12 +173,12 @@ export class Login extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  // This is not running
-  if (state.loginReducer.loggedIn) {
-    Actions.splash();
-  }
+Login.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  LOGGED_IN: PropTypes.bool.isRequired,
+};
 
+function mapStateToProps(state) {
   return {
     LOGGED_IN: state.loginReducer.loggedIn,
   };

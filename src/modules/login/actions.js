@@ -2,11 +2,11 @@ import { LOGIN_SUCCESS, LOGGED_OUT } from './actionTypes';
 import { handleLogin } from './functions';
 
 export const REQUEST_USER = 'REQUEST_POSTS';
-function requestUser(justLogin, handle, email, password) {
+function requestUser(handle, email) {
   return (
     {
       type: REQUEST_USER,
-      user: { email, password },
+      user: { handle, email },
     }
   );
 }
@@ -31,7 +31,7 @@ function error() {
 export const handleSubmit = (justLogin, handle, email, password) => { // eslint-disable-line
 
   return function (dispatch) { // eslint-disable-line
-    dispatch(requestUser(justLogin, handle, email, password));
+    dispatch(requestUser(handle, email));
 
     handleLogin(justLogin, handle, email, password).then((resp) => {
       if (resp != null) {
