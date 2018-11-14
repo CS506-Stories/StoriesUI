@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'space-around',
     alignItems: 'center',
+    paddingTop: 20,
   },
   login: {
     backgroundColor: 'transparent',
