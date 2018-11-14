@@ -1,4 +1,7 @@
 import { Actions } from 'react-native-router-flux';
+import {
+  Alert,
+} from 'react-native';
 
 export function validateEmail(email) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; // eslint-disable-line
@@ -14,18 +17,18 @@ export function displayResult(disp, ema, pass, handle) {
     // this.props.signUp(this.state.handle, this.state.email, this.state.password)
     Actions.splash();
   } else if (!ema && !pass && !handle) {
-    alert('email, password, and handle invalid');
+    Alert.alert('Error', 'email, password, and handle invalid');
   } else if (!ema && !pass) {
-    alert('email and password invalid');
+    Alert.alert('Error', 'email and password invalid');
   } else if (!pass && !handle) {
-    alert('password and handle invalid');
+    Alert.alert('Error', 'password and handle invalid');
   } else if (!ema && !handle) {
-    alert('email and handle invalid');
+    Alert.alert('Error', 'email and handle invalid');
   } else if (!ema) {
-    alert('email invalid');
+    Alert.alert('Error', 'email invalid');
   } else if (!pass) {
-    alert('password invalid');
+    Alert.alert('Error', 'password invalid');
   } else if (!handle) {
-    alert('handle invalid');
+    Alert.alert('Error', 'handle invalid');
   }
 }

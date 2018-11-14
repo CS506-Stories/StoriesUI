@@ -4,6 +4,8 @@ import {
   Image, ImageBackground,
 } from 'react-native';
 
+import { Col, Row, Grid } from 'react-native-easy-grid';
+
 import {
   Container, Content, Form, Item, Input, Label, Button, Text, Footer, FooterTab,
 } from 'native-base';
@@ -33,20 +35,56 @@ export class Login extends Component {
         <ImageBackground source={tempBack} style={styles.back}>
           <Content>
             <Image source={tempLogo} style={styles.logoimg} />
-            <Button
-              stye={styles.login}
-              onPress={() => this.setState({ displayLogin: true })}
-              light
-            >
-              <Text>Login</Text>
-            </Button>
-            <Button
-              color="#ffffff"
-              onPress={() => this.setState({ displayLogin: false })}
-              light
-            >
-              <Text>Sign up</Text>
-            </Button>
+            {
+              this.state.displayLogin
+                ? (
+                  <Grid>
+                    <Row>
+                      <Col style={styles.options}>
+                        <Button
+                          style={[styles.login, styles.active]}
+                          onPress={() => this.setState({ displayLogin: true })}
+                          light
+                        >
+                          <Text style={styles.light}>Login</Text>
+                        </Button>
+                      </Col>
+                      <Col style={styles.options}>
+                        <Button
+                          style={styles.signup}
+                          onPress={() => this.setState({ displayLogin: false })}
+                          light
+                        >
+                          <Text style={styles.light}>Sign up</Text>
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Grid>
+                ) : (
+                  <Grid>
+                    <Row>
+                      <Col style={styles.options}>
+                        <Button
+                          style={styles.login}
+                          onPress={() => this.setState({ displayLogin: true })}
+                          light
+                        >
+                          <Text style={styles.light}>Login</Text>
+                        </Button>
+                      </Col>
+                      <Col style={styles.options}>
+                        <Button
+                          style={[styles.signup, styles.active]}
+                          onPress={() => this.setState({ displayLogin: false })}
+                          light
+                        >
+                          <Text style={styles.light}>Sign up</Text>
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Grid>
+                )
+              }
             <Form>
               <Item floatingLabel>
                 <Label style={styles.light}>Handle</Label>
@@ -58,7 +96,7 @@ export class Login extends Component {
                   autoCorrect={false}
                   onChangeText={(text) => this.setState({ handle: text })}
                   ref={(input) => { this.handleInput = input; }}
-                  onSubmitEditing={() => this.passwordInput.focus()}
+                  // onSubmitEditing={() => this.passwordInput.focus()}
                 />
               </Item>
               {
@@ -75,6 +113,7 @@ export class Login extends Component {
                         returnKeyType="next"
                         onChangeText={(text) => this.setState({ email: text })}
                         ref={(input) => { this.emailInput = input; }}
+                        // onSubmitEditing={() => this.passwordInput.focus()}
                       />
                     </Item>
                   )
