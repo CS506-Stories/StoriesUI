@@ -8,7 +8,7 @@ export function displayResult(disp, ema, pass, handle) {
   if (disp) {
   // TODO call firebase
   // this.props.login(this.state.handle, this.state.password)
-  Actions.splash();
+    Actions.splash();
   } else if (ema && pass && handle) {
     // TODO CALL FIREBASE
     // this.props.signUp(this.state.handle, this.state.email, this.state.password)
