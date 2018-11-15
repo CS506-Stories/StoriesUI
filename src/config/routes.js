@@ -7,6 +7,7 @@ import Splash from '../modules/splash/Splash';
 import Profile from '../modules/profile/Profile';
 import Settings from '../modules/settings/Settings';
 import Camera from '../modules/camera/Camera';
+import Edit from '../modules/edit/Edit';
 
 const MainRouter = () => (
   <Router>
@@ -37,4 +38,4 @@ const MainRouter = () => (
 );
 
 
-export default Camera;
+export default Edit;
