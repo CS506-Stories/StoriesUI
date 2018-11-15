@@ -13,18 +13,15 @@ function firebaseLogin(email, handle, pass) {
   try {
     return auth.signInWithEmailAndPassword(handle, pass);
   } catch (err) {
-    console.log(err);
-    return false;
+    return null;
   }
 }
 
 function firebaseRegister(email, handle, pass) {
   try {
-    auth.createUserWithEmailAndPassword(email, pass).then((resp) => { console.log(resp); });
-    // Add to database?
-    return true;
+    return auth.createUserWithEmailAndPassword(email, pass);
   } catch (err) {
-    return false;
+    return null;
   }
 }
 

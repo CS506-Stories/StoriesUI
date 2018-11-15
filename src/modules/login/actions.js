@@ -28,17 +28,21 @@ function error() {
   );
 }
 
-export const handleSubmit = (justLogin, handle, email, password) => { // eslint-disable-line
-
-  return function (dispatch) { // eslint-disable-line
+export function handleSubmit(justLogin, handle, email, password) {
+  return function firstPromise(dispatch) {
     dispatch(requestUser(handle, email));
 
-    handleLogin(justLogin, handle, email, password).then((resp) => {
-      if (resp != null) {
-        dispatch(recieveUser(resp));
-      } else {
-        dispatch(error());
-      }
-    });
+    handleLogin(justLogin, handle, email, password)
+      .then((resp) => {
+        if (resp != null) {
+          dispatch(recieveUser(resp));
+        } else {
+          dispatch(error());
+        }
+      })
+      .catch((err) => {
+        // TODO: Create custom error handles
+        console.log(err);
+      });
   };
-};
+}

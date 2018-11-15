@@ -17,14 +17,14 @@ const initialState = {
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_SUCCESS:
-      var user = action.user;
+    case LOGIN_SUCCESS: {
+      const { user } = action;
       // var refreshToken = user.refreshToken;
       // AsyncStorage.setItem('refreshToken', refreshToken);
       AsyncStorage.setItem('user', JSON.stringify(user));
 
-      return Object.assign({}, ...state, { loggedIn: true, user: action.user });
-
+      return Object.assign({}, ...state, { loggedIn: true, loggedOut: false, user: action.user });
+    }
     default:
       return state;
   }
