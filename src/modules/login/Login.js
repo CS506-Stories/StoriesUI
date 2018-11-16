@@ -32,13 +32,13 @@ export class Login extends Component {
 
   componentDidMount() {
     if (this.props.LOGGED_IN) {
-      Actions.splash();
+      Actions.mainfeed();
     }
   }
 
   componentDidUpdate() {
     if (this.props.LOGGED_IN) {
-      Actions.splash();
+      Actions.mainfeed();
     }
   }
 
