@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
+
 import {
-  Text, View, Button, ImageBackground, TextInput, StatusBar, Image,
+  Image, ImageBackground,
 } from 'react-native';
 
-import {
-  KeyboardAwareScrollView,
-} from 'react-native-keyboard-aware-scroll-view';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 
+import {
+  Container, Content, Form, Item, Input, Label, Button, Text, Footer, FooterTab,
+} from 'native-base';
+
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
 import styles from './styles';
-import { updateGeneric, handleSubmit } from './actions';
-import { displayResult, validateEmail } from './functions';
+import { handleSubmit } from './actions';
 
 import tempBack from '../../../assets/img/tempBack.jpeg';
 import tempLogo from '../../../assets/img/tempLogo.png';
@@ -22,148 +26,162 @@ export class Login extends Component {
       email: '',
       handle: '',
       password: '',
-      loaded: true,
       displayLogin: true,
     };
   }
 
+  componentDidMount() {
+    if (this.props.LOGGED_IN) {
+      Actions.mainfeed();
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.LOGGED_IN) {
+      Actions.mainfeed();
+    }
+  }
+
   render() {
     return (
-      <ImageBackground source={tempBack} style={styles.back}>
-        {
-        this.state.loaded
-          ? (
-            <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }} scrollEnabled>
-              <StatusBar barStyle="light-content" />
-              <Image source={tempLogo} style={styles.logoimg} />
+      <Container>
+        <ImageBackground source={tempBack} style={styles.back}>
+          <Content>
+            <Image source={tempLogo} style={styles.logoimg} />
+            {
+              this.state.displayLogin
+                ? (
+                  <Grid>
+                    <Row>
+                      <Col style={styles.options}>
+                        <Button
+                          style={[styles.login, styles.active]}
+                          onPress={() => this.setState({ displayLogin: true })}
+                          light
+                        >
+                          <Text style={styles.light}>Login</Text>
+                        </Button>
+                      </Col>
+                      <Col style={styles.options}>
+                        <Button
+                          style={styles.signup}
+                          onPress={() => this.setState({ displayLogin: false })}
+                          light
+                        >
+                          <Text style={styles.light}>Sign up</Text>
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Grid>
+                ) : (
+                  <Grid>
+                    <Row>
+                      <Col style={styles.options}>
+                        <Button
+                          style={styles.login}
+                          onPress={() => this.setState({ displayLogin: true })}
+                          light
+                        >
+                          <Text style={styles.light}>Login</Text>
+                        </Button>
+                      </Col>
+                      <Col style={styles.options}>
+                        <Button
+                          style={[styles.signup, styles.active]}
+                          onPress={() => this.setState({ displayLogin: false })}
+                          light
+                        >
+                          <Text style={styles.light}>Sign up</Text>
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Grid>
+                )
+              }
+            <Form>
+              <Item floatingLabel>
+                <Label style={styles.light}>Handle</Label>
+                <Input
+                  returnKeyType="next"
+                  keyboardAppearance="light"
+                  autoFocus={false}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  onChangeText={(text) => this.setState({ handle: text })}
+                  ref={(input) => { this.handleInput = input; }}
+                  // onSubmitEditing={() => this.passwordInput.focus()}
+                />
+              </Item>
               {
                 this.state.displayLogin
                   ? (
-                    <View style={styles.options}>
-                      <View style={[styles.login, styles.active]}>
-                        <Button onPress={() => this.setState({ displayLogin: true })} title="Login" color="#112D4E" />
-                      </View>
-                      <View style={styles.signup}>
-                        <Button onPress={() => this.setState({ displayLogin: false })} title="Sign up" color="#ffffff" />
-                      </View>
-                    </View>
+                    null
                   ) : (
-                    <View style={styles.options}>
-                      <View style={styles.login}>
-                        <Button onPress={() => this.setState({ displayLogin: true })} title="Login" color="#ffffff" />
-                      </View>
-                      <View style={[styles.signup, styles.active]}>
-                        <Button onPress={() => this.setState({ displayLogin: false })} title="Sign up" color="#112D4E" />
-                      </View>
-                    </View>
-                  )
-                  }
-              <View style={styles.container}>
-                {
-                this.state.displayLogin
-                  ? (
-                    <View>
-                      <TextInput
-                        style={styles.username}
-                        placeholder="Handle"
-                        returnKeyType="next"
-                        keyboardAppearance="light"
-                        autoFocus={false}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        inputStyle={{ marginLeft: 10 }}
-                        onChangeText={this.handleHandle}
-                        ref={input => { this.handleInput = input; }}
-                        onSubmitEditing={() => this.passwordInput.focus()}
-                      />
-                      <TextInput
-                        style={styles.password}
-                        secureTextEntry
-                        placeholder="Password"
-                        returnKeyType="done"
-                        onChangeText={(text) => this.setState({ password: text })}
-                        ref={input => { this.passwordInput = input; }}
-                      />
-                    </View>
-                  ) : (
-                    <View>
-                      <TextInput
-                        style={styles.username}
-                        placeholder="Handle"
-                        keyboardAppearance="light"
-                        autoFocus={false}
-                        autoCapitalize="none"
-                        autoCorrect={false}
-                        inputStyle={{ marginLeft: 10 }}
-                        onChangeText={(text) => this.setState({ handle: text })}
-                        ref={input => { this.handleInput = input; }}
-                        onSubmitEditing={() => this.emailInput.focus()}
-                        returnKeyType="next"
-                      />
-                      <TextInput
-                        style={styles.username}
-                        secureTextEntry={false}
-                        placeholder="Email"
-                        keyboardAppearance="light"
-                        autoFocus={false}
+                    <Item floatingLabel>
+                      <Label style={styles.light}>Email</Label>
+                      <Input
                         autoCapitalize="none"
                         autoCorrect={false}
                         keyboardType="email-address"
                         returnKeyType="next"
-                        inputStyle={{ marginLeft: 10 }}
-                        ref={input => { this.emailInput = input; }}
-                        onSubmitEditing={() => this.passwordInput.focus()}
                         onChangeText={(text) => this.setState({ email: text })}
-                        errorMessage={this.state.isEmailValid ? null : 'Please enter a valid email address'}
+                        ref={(input) => { this.emailInput = input; }}
+                        // onSubmitEditing={() => this.passwordInput.focus()}
                       />
-                      <TextInput
-                        style={styles.username}
-                        secureTextEntry
-                        placeholder="Password"
-                        ref={input => { this.passwordInput = input; }}
-                        returnKeyType="done"
-                        onChangeText={(text) => this.setState({ password: text })}
-                        errorMessage={!this.state.isPasswordValid ? 'Please enter a password with more than 8 characters' : null}
-                      />
-                    </View>
+                    </Item>
                   )
-                }
-              </View>
-              <View style={styles.submit}>
-                <Button
-                  onPress={() => {
-                    handleSubmit(this.state.handle, this.state.email, this.state.password);
-                    displayResult(this.state.displayLogin, validateEmail(this.state.email),
-                      (this.state.password.length >= 8), this.state.handle);
-                  }}
-                  title={this.state.displayLogin ? 'Login' : 'Sign up'}
-                  color="#ffffff"
+              }
+              <Item floatingLabel>
+                <Label style={styles.light}>Password</Label>
+                <Input
+                  secureTextEntry
+                  returnKeyType="done"
+                  ref={(input) => { this.passwordInput = input; }}
+                  onChangeText={(text) => this.setState({ password: text })}
                 />
-              </View>
-            </KeyboardAwareScrollView>
-          )
-          // TODO add loading wheel/ loading screen
-          : <Text>Loading...</Text>
-          }
-      </ImageBackground>
+              </Item>
+            </Form>
+          </Content>
+          <Footer>
+            <FooterTab>
+              <Button
+                onPress={() => {
+                  this.props.handleSubmit(
+                    this.state.displayLogin,
+                    this.state.handle,
+                    this.state.email,
+                    this.state.password,
+                  );
+                }}
+                full
+                style={styles.submit}
+              >
+                {
+                  this.state.displayLogin
+                    ? (
+                      <Text style={styles.light}>Login</Text>
+                    ) : (
+                      <Text style={styles.light}>Sign Up</Text>
+                    )
+                }
+              </Button>
+            </FooterTab>
+          </Footer>
+        </ImageBackground>
+      </Container>
     );
   }
 }
 
+Login.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  LOGGED_IN: PropTypes.bool.isRequired,
+};
+
 function mapStateToProps(state) {
   return {
-    isEmailValid: state.loginReducer.isEmailValid,
-    isHandleValid: state.loginReducer.isHandleValid,
-    isPasswordValid: state.loginReducer.isPasswordValid,
+    LOGGED_IN: state.loginReducer.loggedIn,
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    update: (name, value) => dispatch(updateGeneric(name, value)),
-    handleSubmit: (handle, email, pass) => dispatch(handleSubmit(handle, email, pass)),
-  };
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, { handleSubmit })(Login);

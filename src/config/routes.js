@@ -6,7 +6,8 @@ import routerStyles from './routerStyles';
 import Splash from '../modules/splash/Splash';
 import Profile from '../modules/profile/Profile';
 import Settings from '../modules/settings/Settings';
-import Login from '../modules/login/Login';
+import login from '../modules/login/Login';
+import Mainfeed from '../modules/mainfeed/Mainfeed';
 
 const MainRouter = () => (
   <Router>
@@ -17,14 +18,22 @@ const MainRouter = () => (
         title="Splash"
         renderRightButton={<Icon name="user-circle" size={30} style={routerStyles.rightButtonStyle} onPress={() => Actions.profile()} />}
         renderLeftButton={<Icon name="camera" size={30} style={routerStyles.leftButtonStyle} />}
-        initial
+      />
+
+      <Scene
+        key="mainfeed"
+        component={Mainfeed}
+        title="Stories"
+        renderRightButton={<Icon name="user-circle" size={30} style={routerStyles.rightButtonStyle} onPress={() => Actions.profile()} />}
+        renderLeftButton={<Icon name="camera" size={30} style={routerStyles.leftButtonStyle} />}
       />
 
       <Scene
         key="login"
-        component={Login}
+        component={login}
         title="Login"
         hideNavBar
+        initial
       />
 
       <Scene

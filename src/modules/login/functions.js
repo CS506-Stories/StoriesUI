@@ -1,29 +1,70 @@
+import {
+  Alert,
+} from 'react-native';
+
+import { auth } from '../../config/firebase';
+
 export function validateEmail(email) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; // eslint-disable-line
   return re.test(email);
 }
-export function displayResult(disp, ema, pass, handle) {
-  if (disp) {
-  // TODO call firebase
-  // this.props.login(this.state.handle, this.state.password)
-    alert('great success for login');
-  } else if (ema && pass && handle) {
-    // TODO CALL FIREBASE
-    // this.props.signUp(this.state.handle, this.state.email, this.state.password)
-    alert('great success for signup.');
-  } else if (!ema && !pass && !handle) {
-    alert('email, password, and handle invalid');
-  } else if (!ema && !pass) {
-    alert('email and password invalid');
-  } else if (!pass && !handle) {
-    alert('password and handle invalid');
-  } else if (!ema && !handle) {
-    alert('email and handle invalid');
-  } else if (!ema) {
-    alert('email invalid');
-  } else if (!pass) {
-    alert('password invalid');
-  } else if (!handle) {
-    alert('handle invalid');
+
+function firebaseLogin(email, handle, pass) {
+  try {
+    return auth.signInWithEmailAndPassword(handle, pass);
+  } catch (err) {
+    return null;
   }
+}
+
+function firebaseRegister(email, handle, pass) {
+  try {
+    return auth.createUserWithEmailAndPassword(email, pass);
+  } catch (err) {
+    return null;
+  }
+}
+
+export function handleLogin(justLogin, handle, email, password) {
+  const ema = validateEmail(email);
+  // Do pass check here
+  const pass = true;
+  if (justLogin) {
+    // TODO call firebase
+    return (firebaseLogin(email, handle, password));
+  }
+  if (ema && pass && handle) {
+    // TODO CALL FIREBASE
+    return (firebaseRegister(email, handle, password));
+  }
+  if (!ema && !pass && !handle) {
+    Alert.alert('Error', 'email, password, and handle invalid');
+    return null;
+  }
+  if (!ema && !pass) {
+    Alert.alert('Error', 'email and password invalid');
+    return null;
+  }
+  if (!pass && !handle) {
+    Alert.alert('Error', 'password and handle invalid');
+    return null;
+  }
+  if (!ema && !handle) {
+    Alert.alert('Error', 'email and handle invalid');
+    return null;
+  }
+  if (!ema) {
+    Alert.alert('Error', 'email invalid');
+    return null;
+  }
+  if (!pass) {
+    Alert.alert('Error', 'password invalid');
+    return null;
+  }
+  if (!handle) {
+    Alert.alert('Error', 'handle invalid');
+    return null;
+  }
+
+  return null;
 }
