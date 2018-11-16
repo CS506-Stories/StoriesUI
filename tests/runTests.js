@@ -51,9 +51,10 @@ function callTests(){
   testValidate();
 
   //TODO josh
-  val f = testCamera(null);
-  if(f != null)
-  {
-
-  }
+  var test = testCamera(null);
+  console.assert(test == 'camera invalid', "Error on testCamera. should have returned true or false");
+  test = testCamera(false);
+  console.assert(test == 'no camera permission', "Error on testCamera. should have returned false");
+  test = testCamera(true);
+  console.assert(test == 'camera permission', "Error on testCamera. should have returned true");
 }

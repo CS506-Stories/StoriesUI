@@ -30,10 +30,10 @@ function displayResult(disp, ema, pass, handle) {
 function testCamera(arg){
   const hasCameraPermission = arg;
   if (hasCameraPermission === null) {
-    return 'null';
+    return 'camera invalid';
   } else if (hasCameraPermission === false) {
-    return 'false';
+    return 'no camera permission';
   } else {
-    return 'true';
+    return 'camera permission';
   }
 }
