@@ -7,6 +7,8 @@ import Splash from '../modules/splash/Splash';
 import Profile from '../modules/profile/Profile';
 import Settings from '../modules/settings/Settings';
 import Camera from '../modules/camera/Camera';
+import login from '../modules/login/Login';
+import Mainfeed from '../modules/mainfeed/Mainfeed';
 // import Edit from '../modules/edit/Edit';
 
 const MainRouter = () => (
@@ -17,7 +19,22 @@ const MainRouter = () => (
         component={Splash}
         title="Splash"
         renderRightButton={<Icon name="user-circle" size={30} style={routerStyles.rightButtonStyle} onPress={() => Actions.profile()} />}
+        renderLeftButton={<Icon name="camera" size={30} style={routerStyles.leftButtonStyle} />}
+      />
+
+      <Scene
+        key="mainfeed"
+        component={Mainfeed}
+        title="Stories"
+        renderRightButton={<Icon name="user-circle" size={30} style={routerStyles.rightButtonStyle} onPress={() => Actions.profile()} />}
         renderLeftButton={<Icon name="camera" size={30} style={routerStyles.leftButtonStyle} onPress={() => Actions.camera()} />}
+      />
+
+      <Scene
+        key="login"
+        component={login}
+        title="Login"
+        hideNavBar
         initial
       />
 
@@ -42,6 +59,5 @@ const MainRouter = () => (
     </Scene>
   </Router>
 );
-
 
 export default MainRouter;
