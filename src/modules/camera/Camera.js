@@ -48,8 +48,9 @@ export default class CameraExample extends React.Component {
         >
           <View style={styles.header}>
             <TouchableOpacity style={styles.touchTop}>
-              <Icon name="md-close" 
-                style={styles.exit} 
+              <Icon
+                name="md-close"
+                style={styles.exit}
                 onPress={() => Actions.mainfeed()}
               />
             </TouchableOpacity>

@@ -54,6 +54,7 @@ const MainRouter = () => (
         key="camera"
         component={Camera}
         title="Camera"
+        hideNavBar
       />
 
     </Scene>
