@@ -7,7 +7,7 @@ import Splash from '../modules/splash/Splash';
 import Profile from '../modules/profile/Profile';
 import Settings from '../modules/settings/Settings';
 import Camera from '../modules/camera/Camera';
-import Edit from '../modules/edit/Edit';
+// import Edit from '../modules/edit/Edit';
 
 const MainRouter = () => (
   <Router>
@@ -17,7 +17,7 @@ const MainRouter = () => (
         component={Splash}
         title="Splash"
         renderRightButton={<Icon name="user-circle" size={30} style={routerStyles.rightButtonStyle} onPress={() => Actions.profile()} />}
-        renderLeftButton={<Icon name="camera" size={30} style={routerStyles.leftButtonStyle} />}
+        renderLeftButton={<Icon name="camera" size={30} style={routerStyles.leftButtonStyle} onPress={() => Actions.camera()} />}
         initial
       />
 
@@ -33,9 +33,15 @@ const MainRouter = () => (
         title="Settings"
       />
 
+      <Scene
+        key="camera"
+        component={Camera}
+        title="Camera"
+      />
+
     </Scene>
   </Router>
 );
 
 
-export default Edit;
+export default MainRouter;
