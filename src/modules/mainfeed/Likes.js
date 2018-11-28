@@ -38,7 +38,7 @@ class Likes extends React.Component<likesProps, likesState> {
 			// this.counter.increment;
 			this.setState({ 
 				likes,
-				reactionRate: (serverTime - timestamp)/likes.length
+				reactionRate: (serverTime.toMillis() - timestamp)/likes.length
 			});
 			const animation = new Animated.Value(0);
 			this.setState({ animation });
@@ -55,8 +55,18 @@ class Likes extends React.Component<likesProps, likesState> {
 			this.setState({ likes });
 			// this.counter.decrement();
 		}
-		firestore.collection("posts").doc(post).update({
-			likes, reactionRate
+		const dataRef = firestore.collection("posts").doc(post);
+		firestore.runTransaction(async transaction => {
+			const dataDoc = await transaction.get(dataRef);
+			const likes = dataDoc.data().likes;
+			const reactionRate = dataDoc.data().reactionRate;
+			if (idx === -1) {
+				likes.push(uid);
+				reactionRate = (serverTime.toMillis() - timestamp) / likes.length;
+			} else {
+				likes.splice(uid, 1);
+			}
+			transaction.update(dataRef, { likes, reactionRate });
 		});
 	}
 	render() {

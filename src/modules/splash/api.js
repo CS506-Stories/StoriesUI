@@ -1,5 +1,5 @@
 // This is where functions are written for interacting with the Firebase API
-import { database } from '../../config/firebase';
+import { firestore } from '../../config/firebase';
 
 export type Profile = {
 	id: string,
@@ -31,17 +31,17 @@ export type Post = {
 // 	preview: string
 // };
 
-export default class api {
+// export default class api {
 
-	static profile(): Profile {
-		return database.profile;
-	}
+// 	static profile(): Profile {
+// 		return database.profile;
+// 	}
 
-	static posts(): Post[] {
-		return database.posts;
-	}
+// 	static posts(): Post[] {
+// 		return database.posts;
+// 	}
 
-	static addPost(post: Post) {
-		database.posts.push(post);
-	}
-}
+// 	static addPost(post: Post) {
+// 		database.posts.push(post);
+// 	}
+// }

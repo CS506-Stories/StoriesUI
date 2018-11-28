@@ -4,6 +4,7 @@ import {
 } from 'native-base';
 import { FlatList } from 'react-native';
 import FeedEntry from './components/feedEntry';
+import { auth, firestore, storage } from '../../config/firebase';
 
 const Mainfeed = () => (
   <Container>
@@ -38,5 +39,4 @@ const Mainfeed = () => (
     />
   </Container>
 );
-
 export default Mainfeed;
