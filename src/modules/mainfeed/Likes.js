@@ -12,6 +12,7 @@ type likesProps = {
 
 type likesState = {
 	likes: string[],
+	reactionRate: number,
 	animation: Animated.Value
 };
 
@@ -28,17 +29,16 @@ class Likes extends React.Component<likesProps, likesState> {
 	toggle() {
 		const {post} = this.props;
 		const {timestamp} = this.props;
-		const {reactionRate} = this.number;
+		const {reactionRate} = this.props;
 		const {uid} = auth.currentUser;
 		const {likes} = this.state;
 		const idx = likes.indexOf{uid};
 		if (idx === -1) {
 			likes.push(uid);
 			// this.counter.increment;
-			reactionRate = (serverTime - timestamp)/likes.length;
 			this.setState({ 
 				likes,
-				reactionRate
+				reactionRate: (serverTime - timestamp)/likes.length
 			});
 			const animation = new Animated.Value(0);
 			this.setState({ animation });
