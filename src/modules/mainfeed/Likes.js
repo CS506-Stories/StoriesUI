@@ -28,8 +28,8 @@ class Likes extends React.Component<likesProps, likesState> {
 
 	toggle() {
 		const {post} = this.props;
-		const {timestamp} = this.props;
-		const {reactionRate} = this.props;
+		const {timestamp} = this.state;
+		const {reactionRate} = this.state;
 		const {uid} = auth.currentUser;
 		const {likes} = this.state;
 		const idx = likes.indexOf{uid};
@@ -38,7 +38,7 @@ class Likes extends React.Component<likesProps, likesState> {
 			// this.counter.increment;
 			this.setState({ 
 				likes,
-				reactionRate: (serverTime.toMillis() - timestamp)/likes.length
+				reactionRate: (firestore.Timestamp().toMillis() - timestamp)/likes.length
 			});
 			const animation = new Animated.Value(0);
 			this.setState({ animation });
@@ -62,7 +62,7 @@ class Likes extends React.Component<likesProps, likesState> {
 			const reactionRate = dataDoc.data().reactionRate;
 			if (idx === -1) {
 				likes.push(uid);
-				reactionRate = (serverTime.toMillis() - timestamp) / likes.length;
+				reactionRate = (firestore.Timestamp().toMillis() - timestamp) / likes.length;
 			} else {
 				likes.splice(uid, 1);
 			}
