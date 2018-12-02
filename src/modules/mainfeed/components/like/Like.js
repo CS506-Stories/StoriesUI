@@ -4,6 +4,9 @@ import { Animated, View, Button } from 'react-native';
 import { PropTypes } from 'prop-types';
 import { getReactionRate } from './api';
 import { auth, firestore } from '../../../../config/firebase';
+import {
+  Text, CardItem, Body, Icon,
+} from 'native-base';
 
 class Like extends React.Component {
   constructor(props) {
@@ -20,7 +23,7 @@ class Like extends React.Component {
     this.setState({ likes: this.props.likes, reactionRate: this.props.reactionRate });
   }
 
-  // TODO : import user ID 
+  // TODO : import user ID
   toggle() {
     const uid = auth.currentUser;
     const idx = this.state.likes.indexOf(uid);
@@ -68,11 +71,14 @@ class Like extends React.Component {
 
   render() {
     return (
-      <View>
-        <Button>
-          Hello
-        </Button>
-      </View>
+      <CardItem>
+        <Body>
+          <Text>
+            {this.likes.length}
+          </Text>
+          <Icon name='arrow-up' onPress={toggle()} />
+        </Body>
+      </CardItem>
     );
   }
 }

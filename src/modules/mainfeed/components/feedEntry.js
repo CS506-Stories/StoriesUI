@@ -24,27 +24,7 @@ const FeedEntry = (props) => (
       <CardItem cardBody>
         <Image source={{ uri: props.mainContent }} style={{ height: 300, width: null, flex: 1 }} />
       </CardItem>
-      <CardItem>
-        <Left>
-          <Button transparent>
-            <Icon name="smiley" size={30} />
-            <Badge>
-              <Text>3</Text>
-            </Badge>
-          </Button>
-          <Button transparent>
-            <Icon name="mortar-board" size={35} />
-            <Badge>
-              <Text>5</Text>
-            </Badge>
-          </Button>
-        </Left>
-        <Right>
-          { // TODO: make dynamic etc..
-          }
-          <Like />
-        </Right>
-      </CardItem>
+      <Like />
     </Card>
   </View>
 );
