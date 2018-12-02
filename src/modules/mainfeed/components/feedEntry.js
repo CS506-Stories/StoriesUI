@@ -5,8 +5,9 @@ import {
 import {
   Card, CardItem, Left, Thumbnail, Body, Right, Button, Badge, Text,
 } from 'native-base';
-import Icon from 'react-native-vector-icons/Octicons';
 import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/Octicons';
+import Like from './like/Like';
 
 const FeedEntry = (props) => (
   <View style={{ margin: 22 }}>
@@ -39,7 +40,9 @@ const FeedEntry = (props) => (
           </Button>
         </Left>
         <Right>
-          <Text>11h ago</Text>
+          { // TODO: make dynamic etc..
+          }
+          <Like />
         </Right>
       </CardItem>
     </Card>

@@ -5,23 +5,25 @@ import {
 import { FlatList, ScrollView, Animated, RefreshingControl } from 'react-native';
 import FeedEntry from './components/feedEntry';
 import { auth, firestore, storage } from '../../config/firebase';
-import type {Post} from '../splash/api';
+import {Post} from '../splash/api';
 
-
-type mainfeedState = {
-  scrollAnimation: Animated.Value,
-  refreshing: boolean,
-  posts: Post[],
-  loading: boolean
-};
-
-class Mainfeed extends React.Component<mainfeedState> {
+class Mainfeed extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      scrollAnimation: Animated.Value,
+      refreshing: boolean,
+      posts: [Post],
+      loading: boolean
+    }
+  }
   
   onRefresh() {
     this.setState({refreshing: true});
     setTimeout(() => this.setState({refreshing: false}), 3000);
   }
 
+  //TODO : Put this in the api.js file
   async componentWillMount() Promise<void> {
     this.setState({
       scrollAnimation: new Animated.Value(0),
@@ -37,7 +39,9 @@ class Mainfeed extends React.Component<mainfeedState> {
     });
   }
 
-  render(): React.Node {
+  // TODO: Create this 
+  render() {
+    return();
     const {onRefresh} = this;
     const {scrollAnimation, refreshing, posts, loading} = this.state;
   }
