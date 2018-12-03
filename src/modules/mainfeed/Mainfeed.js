@@ -5,79 +5,97 @@ import {
 import { FlatList, ScrollView, Animated, RefreshingControl } from 'react-native';
 import FeedEntry from './components/feedEntry';
 import { auth, firestore, storage } from '../../config/firebase';
-import {Post} from '../splash/api';
+import { Post } from './api';
 
 class Mainfeed extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      scrollAnimation: Animated.Value,
-      refreshing: boolean,
-      posts: [Post],
-      loading: boolean
+      scrollAnimation: new Animated.Value(0),
+      refreshing: false,
+      posts: [],
+      loading: true,
     }
   }
-  
+
   onRefresh() {
     this.setState({refreshing: true});
     setTimeout(() => this.setState({refreshing: false}), 3000);
   }
 
   //TODO : Put this in the api.js file
-  async componentWillMount() Promise<void> {
+  componentWillMount() {
     this.setState({
-      scrollAnimation: new Animated.Value(0),
+      // scrollAnimation: new Animated.Value(0),
       refreshing: false,
       loading: true
     });
-    const query = await firestore.collection("posts").orderBy("reactionRate", "desc");
-    const posts: Post[] = [];
-    query.foreach(doc => posts.push(doc.data()));
-    this.setState({
-      posts,
-      loading: false
+    let postsArr = [];
+    firestore.collection('posts').get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            postsArr.push(doc.data());
+        });
+      this.setState({
+        posts: postsArr,
+        loading: false,
+      });
+    })
+    .catch(function(error) {
+      console.log(error);
     });
   }
 
-  // TODO: Create this 
   render() {
-    return();
+    return(
+      <Container>
+        <FlatList
+          data={this.state.posts}
+          renderItem={({ item }) => (
+            <FeedEntry
+              profileImage={item.profileImage}
+              mainContent={item.mainContent}
+              username={item.username}
+            />
+          )}
+        />
+      </Container>
+    );
     const {onRefresh} = this;
     const {scrollAnimation, refreshing, posts, loading} = this.state;
   }
 }
 
 // const Mainfeed = () => (
-//   <Container>
-//     <FlatList
-//       data={[
-//         {
-//           profileImage: 'https://facebook.github.io/react/logo-og.png',
-//           mainContent: 'https://facebook.github.io/react/logo-og.png',
-//           username: 'Sean Rice',
-//           key: '1',
-//         },
-//         {
-//           profileImage: 'https://facebook.github.io/react/logo-og.png',
-//           mainContent: 'https://facebook.github.io/react/logo-og.png',
-//           username: 'Sean Rice',
-//           key: '2',
-//         },
-//         {
-//           profileImage: 'https://facebook.github.io/react/logo-og.png',
-//           mainContent: 'https://facebook.github.io/react/logo-og.png',
-//           username: 'Sean Rice',
-//           key: '3',
-//         },
-//       ]}
-//       renderItem={({ item }) => (
-//         <FeedEntry
-//           profileImage={item.profileImage}
-//           mainContent={item.mainContent}
-//           username={item.username}
-//         />
-//       )}
-//     />
-//   </Container>
+  // <Container>
+  //   <FlatList
+  //     data={[
+  //       {
+  //         profileImage: 'https://facebook.github.io/react/logo-og.png',
+  //         mainContent: 'https://facebook.github.io/react/logo-og.png',
+  //         username: 'Sean Rice',
+  //         key: '1',
+  //       },
+  //       {
+  //         profileImage: 'https://facebook.github.io/react/logo-og.png',
+  //         mainContent: 'https://facebook.github.io/react/logo-og.png',
+  //         username: 'Sean Rice',
+  //         key: '2',
+  //       },
+  //       {
+  //         profileImage: 'https://facebook.github.io/react/logo-og.png',
+  //         mainContent: 'https://facebook.github.io/react/logo-og.png',
+  //         username: 'Sean Rice',
+  //         key: '3',
+  //       },
+  //     ]}
+  //     renderItem={({ item }) => (
+  //       <FeedEntry
+  //         profileImage={item.profileImage}
+  //         mainContent={item.mainContent}
+  //         username={item.username}
+  //       />
+  //     )}
+  //   />
+  // </Container>
 // );
 export default Mainfeed;

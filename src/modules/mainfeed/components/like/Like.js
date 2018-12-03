@@ -58,7 +58,7 @@ class Like extends React.Component {
     firestore.runTransaction(async transaction => {
       const dataDoc = await transaction.get(dataRef);
       const { likes } = dataDoc.data();
-      const { reactionRate } = dataDoc.data();
+      let { reactionRate } = dataDoc.data();
       if (idx === -1) {
         likes.push(uid);
         reactionRate = (firestore.Timestamp().toMillis() - timestamp) / likes.length;
