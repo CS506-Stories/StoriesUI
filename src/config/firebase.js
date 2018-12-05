@@ -20,5 +20,5 @@ export const storage = firebase.storage();
 export const firestore = firebase.firestore();
 
 firestore.settings({
-  timestampsInSnapshots: true
+  timestampsInSnapshots: true,
 });
