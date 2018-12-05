@@ -1,5 +1,5 @@
 import { LOGIN_SUCCESS, LOGGED_OUT } from './actionTypes';
-import { handleLogin } from './functions';
+import { handleLogin, getFirestoreUser } from './functions';
 
 export const REQUEST_USER = 'REQUEST_POSTS';
 function requestUser(handle, email) {
@@ -12,6 +12,9 @@ function requestUser(handle, email) {
 }
 
 function recieveUser(resp) {
+  // Create function to get user from firestore
+  // If it doesnt exist,create a new one.
+  getFirestoreUser(resp);
   return (
     {
       type: LOGIN_SUCCESS,

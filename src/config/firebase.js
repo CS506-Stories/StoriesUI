@@ -1,4 +1,5 @@
 import * as firebase from 'firebase';
+import 'firebase/firestore';
 import * as c from './constants';
 
 // Initialize Firebase
@@ -16,3 +17,8 @@ firebase.initializeApp(config);
 export const database = firebase.database();
 export const auth = firebase.auth();
 export const storage = firebase.storage();
+export const firestore = firebase.firestore();
+
+firestore.settings({
+  timestampsInSnapshots: true,
+});
