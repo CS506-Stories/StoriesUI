@@ -2,7 +2,7 @@ import {
   Alert,
 } from 'react-native';
 
-import { auth } from '../../config/firebase';
+import { auth, firestore } from '../../config/firebase';
 
 export function validateEmail(email) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; // eslint-disable-line
@@ -22,6 +22,19 @@ function firebaseRegister(email, handle, pass) {
     return auth.createUserWithEmailAndPassword(email, pass);
   } catch (err) {
     return null;
+  }
+}
+
+export function getFirestoreUser(resp) {
+  // If its a new user, create an entry in firestore
+  if (resp.additionalUserInfo.isNewUser) {
+    firestore.collection('users').doc(resp.user.uid).set({
+      email: resp.user.email,
+      handle: 'nothing yet',
+      points: 0,
+    })
+      .then(() => console.log('Document successfully written!'))
+      .catch((error) => console.error('Error writing document: ', error));
   }
 }
 
