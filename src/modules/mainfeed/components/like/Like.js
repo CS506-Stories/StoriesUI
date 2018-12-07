@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Animated, View, Button } from 'react-native';
+import { Animated, View, Button, Easing } from 'react-native';
 // import Odometer from 'react-odometer';
 import { PropTypes } from 'prop-types';
-import { getReactionRate } from './api';
+import { calReactionRate, getPosts } from './api';
 import { auth, firestore } from '../../../../config/firebase';
 import {
   Text, CardItem, Body, Icon,
@@ -20,21 +20,30 @@ class Like extends React.Component {
   // counter: Odometer;
 
   componentWillMount() {
-    this.setState({ likes: this.props.likes, reactionRate: this.props.reactionRate });
+    if (this.props.likes == null)
+        this.setState({ likes: []})
+    else
+      this.setState({ likes: this.props.likes})
+
+    this.setState({
+      postID: this.props.postID,
+      reactionRate: this.props.reactionRate,
+      timestamp: this.props.timestamp
+    });
   }
 
   // TODO : import user ID
   toggle() {
-    const uid = auth.currentUser;
+    const { uid } = auth.currentUser;
     const idx = this.state.likes.indexOf(uid);
     if (idx === -1) {
-      const likeArr = this.props.likes;
+      let likeArr = this.state.likes;
       likeArr.push(uid);
       this.setState({ likes: likeArr });
 
       // this.counter.increment;
       // Probably better to do this calculation somewhere else, like api.js
-      const newReactionRate = getReactionRate(likeArr.length, this.props.timestamp);
+      const newReactionRate = calReactionRate(likeArr.length, this.state.timestamp);
       this.setState({ reactionRate: newReactionRate });
       const animation = new Animated.Value(0);
       this.setState({ animation });
@@ -53,7 +62,7 @@ class Like extends React.Component {
     }
     // TODO : move this into api.js
 
-    const dataRef = firestore.Firestore.collection("posts").doc(post);
+    const dataRef = getPosts(this.state.postID);
 
     firestore.runTransaction(async transaction => {
       const dataDoc = await transaction.get(dataRef);
@@ -61,7 +70,7 @@ class Like extends React.Component {
       let { reactionRate } = dataDoc.data();
       if (idx === -1) {
         likes.push(uid);
-        reactionRate = (firestore.Timestamp().toMillis() - timestamp) / likes.length;
+        reactionRate = calReactionRate(likes.length, this.state.timestamp);
       } else {
         likes.splice(uid, 1);
       }
@@ -74,9 +83,9 @@ class Like extends React.Component {
       <CardItem>
         <Body>
           <Text>
-            {this.likes.length}
+            {this.state.likes.length}
           </Text>
-          <Icon name='arrow-up' onPress={toggle()} />
+          <Icon name='arrow-up' onPress={this.toggle()} />
         </Body>
       </CardItem>
     );
@@ -84,9 +93,10 @@ class Like extends React.Component {
 }
 
 Like.propTypes = {
-  likes: PropTypes.instanceOf(Array).isRequired,
-  post: PropTypes.string.isRequired,
-  timestamp: PropTypes.number.isRequired,
+  postID: PropTypes.string.isRequired,
+  likes: PropTypes.instanceOf(Array),
+  timestamp: PropTypes.string.isRequired,
+  reactionRate: PropTypes.number.isRequired,
 };
 
 export default Like;

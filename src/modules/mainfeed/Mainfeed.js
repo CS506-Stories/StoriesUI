@@ -5,7 +5,6 @@ import {
 import { FlatList, ScrollView, Animated, RefreshingControl } from 'react-native';
 import FeedEntry from './components/feedEntry';
 import { auth, firestore, storage } from '../../config/firebase';
-import { Post } from './api';
 
 class Mainfeed extends React.Component {
   constructor(props){
@@ -31,10 +30,11 @@ class Mainfeed extends React.Component {
       loading: true
     });
     let postsArr = [];
-    firestore.collection('posts').get().then(function(querySnapshot) {
+    firestore.collection('posts').orderBy("reactionRate", "desc").get().then((querySnapshot) => {
         querySnapshot.forEach(function(doc) {
             postsArr.push(doc.data());
         });
+      console.log(postsArr);
       this.setState({
         posts: postsArr,
         loading: false,
@@ -52,9 +52,13 @@ class Mainfeed extends React.Component {
           data={this.state.posts}
           renderItem={({ item }) => (
             <FeedEntry
+              postID={item.postID}
+              url={item.url}
               profileImage={item.profileImage}
-              mainContent={item.mainContent}
               username={item.username}
+              timestamp={item.timestamp.toString()}
+              likes={item.likes}
+              reactionRate={item.reactionRate}
             />
           )}
         />
@@ -64,7 +68,6 @@ class Mainfeed extends React.Component {
     const {scrollAnimation, refreshing, posts, loading} = this.state;
   }
 }
-
 // const Mainfeed = () => (
   // <Container>
   //   <FlatList

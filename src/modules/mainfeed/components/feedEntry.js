@@ -22,17 +22,26 @@ const FeedEntry = (props) => (
         </Left>
       </CardItem>
       <CardItem cardBody>
-        <Image source={{ uri: props.mainContent }} style={{ height: 300, width: null, flex: 1 }} />
+        <Image source={{ uri: props.url }} style={{ height: 300, width: null, flex: 1 }} />
       </CardItem>
-      <Like />
+      <Like
+        postID={this.props.postID}
+        likes={this.props.likes}
+        timestamp={this.props.timestamp}
+        reactionRate={this.props.reactionRate}
+      />
     </Card>
   </View>
 );
 
 FeedEntry.propTypes = {
-  mainContent: PropTypes.string.isRequired,
+  postID: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
   profileImage: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
+  likes: PropTypes.instanceOf(Array),
+  timestamp: PropTypes.string.isRequired,
+  reactionRate: PropTypes.number.isRequired,
 };
 
 export default FeedEntry;
