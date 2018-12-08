@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Animated, View, Button, Easing } from 'react-native';
 // import Odometer from 'react-odometer';
 import { PropTypes } from 'prop-types';
-import { calReactionRate, getPosts } from './api';
+import { calReactionRate, getPost } from './api';
 import { auth, firestore } from '../../../../config/firebase';
 import {
   Text, CardItem, Body, Icon,
@@ -16,6 +16,7 @@ class Like extends React.Component {
       reactionRate: 0,
       animation: Animated.Value
     };
+    this.toggle = this.toggle.bind(this);
   }
   // counter: Odometer;
 
@@ -61,8 +62,7 @@ class Like extends React.Component {
       // this.counter.decrement();
     }
     // TODO : move this into api.js
-
-    const dataRef = getPosts(this.state.postID);
+    const dataRef = getPost(this.state.postID);
 
     firestore.runTransaction(async transaction => {
       const dataDoc = await transaction.get(dataRef);
@@ -85,7 +85,7 @@ class Like extends React.Component {
           <Text>
             {this.state.likes.length}
           </Text>
-          <Icon name='arrow-up' onPress={this.toggle()} />
+          <Icon name='arrow-up' onPress={this.toggle} />
         </Body>
       </CardItem>
     );

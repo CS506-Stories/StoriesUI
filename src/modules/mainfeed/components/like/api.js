@@ -12,8 +12,8 @@ export function calReactionRate(number, timestamp) {
 //   });
 //   return docRef;
 // }
-export function getPosts(post_id) {
-  return firebase.collection("posts").doc(post_id);
+export function getPost(post_id) {
+  return firestore.collection("posts").doc(post_id);
 }
 // export function getTimeStamp(post) {
 //

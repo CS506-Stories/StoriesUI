@@ -25,10 +25,10 @@ const FeedEntry = (props) => (
         <Image source={{ uri: props.url }} style={{ height: 300, width: null, flex: 1 }} />
       </CardItem>
       <Like
-        postID={this.props.postID}
-        likes={this.props.likes}
-        timestamp={this.props.timestamp}
-        reactionRate={this.props.reactionRate}
+        postID={props.postID}
+        likes={props.likes}
+        timestamp={props.timestamp}
+        reactionRate={props.reactionRate}
       />
     </Card>
   </View>
