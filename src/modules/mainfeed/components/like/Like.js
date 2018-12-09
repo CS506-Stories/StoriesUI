@@ -16,7 +16,7 @@ class Like extends React.Component {
     this.state = {
       likes: [String],
       animation: Animated.Value,
-      uid: auth.currentUser,
+      uid: auth.currentUser.uid,
     };
     this.toggle = this.toggle.bind(this);
   }

@@ -27,19 +27,16 @@ class Mainfeed extends React.Component {
   componentDidMount() {
     if (this.state.loading) {
       getPostCollection().then((resp) => {
-          console.log("SEtting state...");
-          console.log(resp);
-          this.setState({
-            posts: resp,
-            loading: false,
-          });
-       });
+        this.setState({
+          posts: resp,
+          loading: false,
+        });
+      });
     }
   }
 
   render() {
     if (!this.state.loading) {
-      console.log("MAINFEED: postID: " + this.state.posts[0].postID);
       return (
         <Container>
           <FlatList
