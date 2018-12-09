@@ -1,30 +1,34 @@
-import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
-import { Footer, Button, Right } from 'native-base';
+import React, { Component } from 'react';
+
+import { Text, View, TouchableOpacity, Image, ImageBackground } from 'react-native';
+import { Footer, Button, Right, Icon } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 
 import styles from './styles';
 
-export default class Edit extends React.Component {
+export default class edit extends Component {
+  constructor(props) {
+   super(props);
+ }
   render() {
       return (
-        <View style={{ flex: 1 }}>
-            <View style={styles.picture}>
-                <Text> Picture </Text>
-            </View>
-            <View>
-              <Footer>
-                <Right>
+        <ImageBackground source={{uri: this.props.data.uri}} style={styles.back}>
+          <View style={{flex:1}}>
+            <TouchableOpacity style={styles.touchTop} onPress={() => Actions.camera()}>
+                <Icon name="md-close" style={styles.exit} />
+            </TouchableOpacity>
 
-                <TouchableOpacity style={ styles.touch }>
-                  <Button>
-                    <Text style={{ color: 'white', fontSize: 20 }}> Post </Text>
-                  </Button>
-                </TouchableOpacity>
-
-                </Right>
-              </Footer>
-            </View>
-        </View>
+              <View style={styles.footer}> 
+                    <TouchableOpacity style={ styles.touch }>
+                    
+                      
+                        <Text style={styles.post}> Post </Text>
+                       
+                    
+                    </TouchableOpacity>
+              </View>       
+          </View>
+        </ImageBackground>
       );
     }
   }

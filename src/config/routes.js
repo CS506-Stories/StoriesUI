@@ -18,7 +18,7 @@ const MainRouter = () => (
         title="Splash"
         renderRightButton={<Icon name="user-circle" size={30} style={routerStyles.rightButtonStyle} onPress={() => Actions.profile()} />}
         renderLeftButton={<Icon name="camera" size={30} style={routerStyles.leftButtonStyle} />}
-        initial
+        // initial
       />
 
       <Scene
@@ -33,9 +33,24 @@ const MainRouter = () => (
         title="Settings"
       />
 
+      <Scene
+        key="camera"
+        component={Camera}
+        title="Camera"
+        hideNavBar
+        initial
+      />
+
+      <Scene
+        key="edit"
+        component={Edit}
+        title="Edit"
+        hideNavBar
+      />
+
     </Scene>
   </Router>
 );
 
 
-export default Edit;
+export default MainRouter;

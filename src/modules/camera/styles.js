@@ -1,14 +1,16 @@
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({  
+  CameraButton: {backgroundColor: 'transparent', alignSelf: 'center', justifyContent: 'center', alignItems: 'center'},
+  photoGroup: { flex: 1},
   exit: {
     fontSize: 30,
-    marginTop: 20,
+    marginTop: 35,
     color: 'white',
   },
   reverse: {
     fontSize: 35,
-    marginTop: 20,
+    marginTop: 35,
     color: '#FF8732',
   },
 
@@ -42,6 +44,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  cancel: {
+    position: 'absolute',
+    right: 20,
+    top: 20,
+    backgroundColor: 'transparent',
+    color: '#FFF',
+    fontWeight: '600',
+    fontSize: 17,
+  }
 
 });
 
