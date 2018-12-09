@@ -6,7 +6,6 @@ import {
   Card, CardItem, Left, Thumbnail, Body, Right, Button, Badge, Text,
 } from 'native-base';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/Octicons';
 import Like from './like/Like';
 
 const FeedEntry = (props) => (
