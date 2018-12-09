@@ -27,6 +27,8 @@ class Mainfeed extends React.Component {
   componentDidMount() {
     if (this.state.loading) {
       getPostCollection().then((resp) => {
+        resp.sort((a, b) => b.reactionRate - a.reactionRate);
+        resp.sort();
         this.setState({
           posts: resp,
           loading: false,
