@@ -6,28 +6,6 @@ import { Actions } from 'react-native-router-flux';
 
 import styles from './styles';
 
-<<<<<<< HEAD
-const Edit = () => (
-  <View style={{ flex: 1 }}>
-    <View style={styles.picture}>
-      <Text>Picture</Text>
-    </View>
-    <View>
-      <Footer>
-        <Right>
-          <TouchableOpacity style={styles.touch}>
-            <Button>
-              <Text style={{ color: 'white', fontSize: 20 }}>Post</Text>
-            </Button>
-          </TouchableOpacity>
-        </Right>
-      </Footer>
-    </View>
-  </View>
-);
-
-export default Edit;
-=======
 export default class edit extends Component {
   constructor(props) {
    super(props);
@@ -54,4 +32,3 @@ export default class edit extends Component {
       );
     }
   }
->>>>>>> 460bb389a29349b4cc6acfa0cbbd3b09afee387f
