@@ -9,7 +9,7 @@ import Settings from '../modules/settings/Settings';
 import Camera from '../modules/camera/Camera';
 import login from '../modules/login/Login';
 import Mainfeed from '../modules/mainfeed/Mainfeed';
-// import Edit from '../modules/edit/Edit';
+import Edit from '../modules/edit/Edit';
 
 const MainRouter = () => (
   <Router>
@@ -55,6 +55,13 @@ const MainRouter = () => (
         key="camera"
         component={Camera}
         title="Camera"
+        hideNavBar
+      />
+
+      <Scene
+        key="edit"
+        component={Edit}
+        title="Edit"
         hideNavBar
       />
 
