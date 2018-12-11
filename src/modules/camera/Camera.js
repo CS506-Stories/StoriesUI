@@ -10,8 +10,6 @@ import { Camera, Permissions } from 'expo';
 import { Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
-import { Actions } from 'react-native-router-flux';
-
 import styles from './styles';
 
 export class Cam extends Component {
@@ -32,8 +30,8 @@ export class Cam extends Component {
    if (this.state.isCapturing === true)
     {
         //alert("taking picture...");
-        await this.camera.takePictureAsync().then((photo) => {
-          this.setState({ capturedPhoto: photo.uri });
+        await this.camera.takePictureAsync({ skipProcessing: true, fixOrientation: true, exif: true, base64: true }).then((photo) => {
+          photo.exif.Orientation = 1;
           Actions.edit({data: photo});
         })
         .catch(function(err) {
