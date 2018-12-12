@@ -100,7 +100,7 @@ export class Login extends Component {
               }
             <Form>
               <Item floatingLabel>
-                <Label style={styles.light}>Handle</Label>
+                <Label style={styles.light}>Email</Label>
                 <Input
                   returnKeyType="next"
                   keyboardAppearance="light"
