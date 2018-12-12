@@ -21,8 +21,8 @@ export default class edit extends Component {
               <View style={styles.footer}> 
                     <TouchableOpacity style={ styles.touch }>
                     
-                      
-                        <Text style={styles.post}> Post </Text>
+                    <Icon name="ios-paper-plane" style={styles.post} />
+                        {/* <Text style={styles.post}> Post </Text> */}
                        
                     
                     </TouchableOpacity>

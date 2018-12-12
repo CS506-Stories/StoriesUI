@@ -30,7 +30,6 @@ export class Cam extends Component {
   async takePicture() {
    if (this.state.isCapturing === true)
     {
-        //alert("taking picture...");
         await this.camera.takePictureAsync().then((photo) => {
           this.setState({ capturedPhoto: photo.uri });
           Actions.edit({data: photo});
@@ -65,6 +64,7 @@ export class Cam extends Component {
 
           <View style={styles.header}>
             <TouchableOpacity style={styles.touchTop}>
+            {/* <TouchableOpacity style={styles.touchTop} onPress={() => Actions.mainfeed()}> */}
               <Icon name="md-close" style={styles.exit} />
             </TouchableOpacity>
 
