@@ -3,18 +3,19 @@ import { storage, auth, database, firestore } from '../../config/firebase';
 import base64 from 'react-native-base64';
 // I feel like profile picture, and username dont need to be in post
 
-function uploadToStorage(postID, imageURI) {
+function uploadToStorage(postID, image) {
   const storageRef = storage.ref();
-  const imageString = 'images/' + postID + '.jpg';
+  const imageString = 'images/' + postID + '.jpeg';
   const imageRef = storageRef.child(imageString);
   // decodes the base64 string and stores in the buffer
   // const buff = Buffer.from(imageURI.base64, 'base64');
   // var bytes = base64.decode(imageURI.base64);
   // returns the utf8
   // const text = buff.toString('utf8');
-  const base64OnlyValidChars = (imageURI.base64).substring(0, ((imageURI.base64).length -2));
+  // const base64OnlyValidChars = image.base64;
+  // const base64OnlyValidChars = (imageURI.base64).substring(0, ((imageURI.base64).length -2));
   const prom =
-  imageRef.putString(base64OnlyValidChars, 'base64')
+  imageRef.putString(image.base64)
     .then((snapshot) => {
       console.log('Uploaded a blob or file!');
       console.log(snapshot);
