@@ -34,6 +34,16 @@ export default class edit extends Component {
             <TouchableOpacity style={styles.touch}>
               <Text style={styles.post} onPress={this.sendToFirebase}> Post </Text>
             </TouchableOpacity>
+
+              <View style={styles.footer}>
+                    <TouchableOpacity style={ styles.touch }>
+
+                    <Icon name="ios-paper-plane" style={styles.post} />
+                        {/* <Text style={styles.post}> Post </Text> */}
+
+
+                    </TouchableOpacity>
+              </View>
           </View>
         </View>
       </ImageBackground>

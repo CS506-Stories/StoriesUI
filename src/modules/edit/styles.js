@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   post: {
     color: '#326CFF', 
-    fontSize: 25,
+    fontSize: 40,
     marginBottom: 25,
     alignSelf: 'flex-end',
     fontWeight: "bold",

@@ -64,6 +64,7 @@ export class Cam extends Component {
 
           <View style={styles.header}>
             <TouchableOpacity style={styles.touchTop}>
+            {/* <TouchableOpacity style={styles.touchTop} onPress={() => Actions.mainfeed()}> */}
               <Icon name="md-close" style={styles.exit} />
             </TouchableOpacity>
 

@@ -28,7 +28,6 @@ const MainRouter = () => (
         title="Stories"
         renderRightButton={<Icon name="user-circle" size={30} style={routerStyles.rightButtonStyle} onPress={() => Actions.profile()} />}
         renderLeftButton={<Icon name="camera" size={30} style={routerStyles.leftButtonStyle} onPress={() => Actions.camera()} />}
-        initial
       />
 
       <Scene
@@ -36,7 +35,7 @@ const MainRouter = () => (
         component={login}
         title="Login"
         hideNavBar
-        // initial
+        initial
       />
 
       <Scene
