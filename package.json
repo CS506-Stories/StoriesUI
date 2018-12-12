@@ -7,7 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "lint": "eslint ./src/*"
+    "lint": "eslint ./src/*",
+    "test": "jest"
   },
   "dependencies": {
     "@expo/vector-icons": "^8.0.0",
@@ -15,6 +16,7 @@
     "buffer": "^5.2.1",
     "expo": "^30.0.1",
     "firebase": "^5.5.8",
+    "jest": "^23.6.0",
     "native-base": "^2.8.1",
     "prop-types": "^15.6.2",
     "react": "16.3.1",
@@ -37,5 +39,8 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1"
+  },
+  "transform": {
+      "^.+\\.(t|j)sx?$": "ts-jest"
   }
 }
