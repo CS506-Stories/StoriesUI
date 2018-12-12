@@ -28,10 +28,6 @@ const MainRouter = () => (
         title="Stories"
         renderRightButton={<Icon name="user-circle" size={30} style={routerStyles.rightButtonStyle} onPress={() => Actions.profile()} />}
         renderLeftButton={<Icon name="camera" size={30} style={routerStyles.leftButtonStyle} onPress={() => Actions.camera()} />}
-<<<<<<< HEAD
-=======
-        // initial
->>>>>>> origin/mainfeed-dec11
       />
 
       <Scene
